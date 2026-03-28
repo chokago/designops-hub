@@ -54,6 +54,12 @@
       "label": "E-commerce",
       "e": "🛒",
       "color": "#5e30eb"
+    },
+    {
+      "id": "custom-roi-impact-mnaj7d7r",
+      "label": "ROI & Impact",
+      "e": "🎯",
+      "color": "#000000"
     }
   ]
 }
