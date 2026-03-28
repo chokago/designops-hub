@@ -1,6 +1,33 @@
 {
   "resources": [
     {
+      "id": "1774722878978",
+      "url": "https://learn.thedesignsystem.guide/p/from-figma-to-interactive-components",
+      "title": "Transformer le design Figma en composants interactifs réels",
+      "summary": "Ce guide explique comment convertir des maquettes statiques en composants de code fonctionnels et réutilisables. C'est une étape cruciale pour assurer que la \"source de vérité\" du design soit fidèlement traduite en production.",
+      "tldr": "Ce guide explique comment convertir des maquettes statiques en composants de code fonctionnels et réutilisables. C'est une étape cruciale pour assurer que la \"source de vérité\" du design soit fidèlement traduite en production.",
+      "insights": [
+        "==Parité stricte Design-Code : Les noms des composants et de leurs variantes dans Figma doivent correspondre exactement à ceux du code pour éviter les erreurs de traduction. ==",
+        "Structure via Auto Layout : L'abandon des cadres fixes au profit de l'Auto Layout garantit une structure de données propre et adaptable.",
+        "Synchronisation des Tokens : Les design tokens (couleurs, typographies) doivent être mappés et synchronisés entre Figma et la base de code pour maintenir l'unité visuelle.",
+        "==Storybook comme pont : Storybook est l'outil indispensable pour documenter les composants isolés et tester leurs différents états (actif, erreur, chargement). ==",
+        "**Documentation vivante : La documentation ne doit pas seulement être humaine, mais structurée pour permettre une récupération facile des connaissances techniques. **",
+        "Hygiène des calques : Un nommage descriptif et une hiérarchie claire dans Figma permettent une navigation fluide pour les développeurs et les agents IA.",
+        "Infrastructure dépendante : La réussite du handover repose sur un processus défini de **mise à jour continue entre les fichiers de design et les actifs de code**."
+      ],
+      "tags": [
+        "design-system",
+        "design-to-code",
+        "figma",
+        "storybook",
+        "tokens",
+        "gouvernance",
+        "veille"
+      ],
+      "notes": "",
+      "createdAt": 1774722878981
+    },
+    {
       "id": "1774722688109",
       "url": "https://southleft.com/insights/ai/figma-console-mcp-ai-powered-design-system-management/",
       "title": "Figma Console MCP : l'IA au cœur du design",
