@@ -1,6 +1,33 @@
 {
   "resources": [
     {
+      "id": "1774727403533",
+      "url": "https://design-systems-mcp.southleft.com/",
+      "title": "Créer un Design System Agentique et Autonome",
+      "summary": "Cette ressource définit les principes d'un système de design \"agentique\" qui priorise l'autonomie et le pouvoir d'action de l'utilisateur à travers des interfaces adaptatives. Elle propose une méthodologie pour transformer les systèmes traditionnels en écosystèmes modulaires pilotés par le contexte et le feedback utilisateur.",
+      "tldr": "Cette ressource définit les principes d'un système de design \"agentique\" qui priorise l'autonomie et le pouvoir d'action de l'utilisateur à travers des interfaces adaptatives. Elle propose une méthodologie pour transformer les systèmes traditionnels en écosystèmes modulaires pilotés par le contexte et le feedback utilisateur.",
+      "insights": [
+        "Priorité à l'autonomie utilisateur : Le système agentique vise à redonner le contrôle et l'indépendance aux utilisateurs dans leurs interactions numériques.",
+        "Approche basée sur le contexte : L'utilisation de la conscience contextuelle permet de créer des systèmes qui s'adaptent dynamiquement aux besoins spécifiques de chaque application.",
+        "==Modularité et flexibilité : La création de composants modulaires et reconfigurables permet aux utilisateurs de personnaliser leurs parcours selon leurs préférences.==",
+        "==Accessibilité comme pilier d'agence : L'inclusion native renforce l'expérience agentique en offrant autonomie et contrôle à tous les profils d'utilisateurs.==",
+        "**Gouvernance et Design Tokens : Une documentation rigoureuse et un dépôt standardisé de tokens sont indispensables pour maintenir les principes agentiques lors de la transition.**",
+        "Collaboration interdisciplinaire : La réussite du système repose sur une coopération étroite entre le design, le développement et le produit pour garantir une vision holistique.",
+        "Boucles de feedback continu : L'intégration de canaux de retour utilisateur permet d'orienter les choix de design et les évolutions du système de manière itérative."
+      ],
+      "tags": [
+        "design-system",
+        "accessibilite",
+        "inclusivite",
+        "gouvernance",
+        "tokens",
+        "veille",
+        "experience-machine"
+      ],
+      "notes": "",
+      "createdAt": 1774727403535
+    },
+    {
       "id": "1774725767952",
       "url": "https://docs.google.com/document/d/15SBwcMJc5wnaPy8bC1UG5NXmRsACcCMW/edit?_hsenc=p2ANqtz-9A-Be1MtbLBweQ6RZCTJvKNraIE9Kvwj6G_bQ6CUXlo3QvQtCnOTFp_MbDyNUsc5tiD6TAyvbEjvU6zMWvvbXH7hKVbD5OBb69p18Z-oVl8Jr_OWw&_hsmi=25134692",
       "title": "Scorecard de maturité IA pour Design Systems",
