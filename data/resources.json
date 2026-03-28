@@ -1,6 +1,31 @@
 {
   "resources": [
     {
+      "id": "1774724673270",
+      "url": "https://inclusivedesignprinciples.info/fr/",
+      "title": "Sept piliers pour une conception numérique réellement inclusive",
+      "summary": "Ce manifeste propose une approche du design centrée sur l'humain, visant à répondre aux besoins de tous les utilisateurs, quelles que soient leurs capacités ou leur contexte. Il transforme l'accessibilité technique en une stratégie d'expérience utilisateur équitable et enrichissante pour chacun.",
+      "tldr": "Ce manifeste propose une approche du design centrée sur l'humain, visant à répondre aux besoins de tous les utilisateurs, quelles que soient leurs capacités ou leur contexte. Il transforme l'accessibilité technique en une stratégie d'expérience utilisateur équitable et enrichissante pour chacun.",
+      "insights": [
+        "==Expérience identique : L'interface doit offrir une valeur, une qualité et une efficacité équivalentes à tous les utilisateurs, peu importe les outils d'assistance qu'ils utilisent.==",
+        "Contexte situationnel : Le design doit anticiper les circonstances de l'utilisateur, qu'il soit néophyte, sous pression, ou dans un environnement physique contraignant (ex. plein soleil).",
+        "Cohérence structurelle : L'utilisation de modèles de conception familiers et d'un langage harmonisé aide l'utilisateur à se familiariser rapidement avec l'interface.",
+        "Contrôle utilisateur : Il est crucial de ne pas bloquer les fonctions natives comme le zoom et de permettre l'arrêt simple des contenus animés ou automatiques.",
+        "Liberté de choix : Offrir plusieurs chemins pour accomplir une tâche complexe permet à chacun de choisir la méthode la plus confortable selon son contexte.",
+        "Priorisation du contenu : Aider l'utilisateur à se concentrer sur l'essentiel en révélant les fonctionnalités progressivement et en clarifiant la hiérarchie visuelle.",
+        "Valeur ajoutée : Exploiter les capacités des appareils (vibration, voix, géolocalisation) permet de simplifier les tâches et de créer des expériences sur mesure."
+      ],
+      "tags": [
+        "inclusivite",
+        "accessibilite",
+        "design-system",
+        "audit-conformite",
+        "veille"
+      ],
+      "notes": "",
+      "createdAt": 1774724673271
+    },
+    {
       "id": "1774724401436",
       "url": "https://learn.thedesignsystem.guide/p/how-to-turn-metrics-into-actionable",
       "title": "Transformer les métriques de Design System en actions",
