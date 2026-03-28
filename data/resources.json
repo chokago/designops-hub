@@ -1,6 +1,34 @@
 {
   "resources": [
     {
+      "id": "1774724850933",
+      "url": "https://www.linkedin.com/posts/jon-prepeluh-03b6b9176_designsystems-ai-figma-ugcPost-7436775739838062593-fXRw?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
+      "title": "Figma vers Storybook : automatisation totale du design-to-code.",
+      "summary": "Ce workflow révolutionnaire permet aux designers de transformer des composants Figma en bibliothèques Storybook documentées et codées en quelques minutes sans intervention manuelle. Il repose sur une IA capable de lire la structure réelle des données (calques, variants, variables) pour supprimer toute friction lors du handover.",
+      "tldr": "Ce workflow révolutionnaire permet aux designers de transformer des composants Figma en bibliothèques Storybook documentées et codées en quelques minutes sans intervention manuelle. Il repose sur une IA capable de lire la structure réelle des données (calques, variants, variables) pour supprimer toute friction lors du handover.",
+      "insights": [
+        "Accès structuré via MCP : Contrairement aux analyses basées sur des captures d'écran, le serveur MCP Figma Console permet à l'IA d'accéder directement à l'arborescence des composants et aux liaisons de variables.",
+        "==Documentation auto-générée : Le système crée automatiquement la documentation technique directement sur les plans de travail Figma en quelques secondes.==",
+        "**Codage \"Production-Ready\" : Claude Code (dans VS Code) traduit les définitions de composants en code React prêt pour la production.**",
+        "Mapping automatique des Tokens : Les variables Figma (couleurs, espacement, typographie) sont liées aux design tokens de manière automatisée, garantissant l'utilisation systématique du bon token.",
+        "**Intégration Storybook directe : Les composants finissent leur course dans Storybook, entièrement documentés et fonctionnels, sans aucun copier-coller manuel.**",
+        "==Autonomie des designers : Ce setup permet à un designer de piloter seul l'ensemble du cycle de développement d'un composant, de la conception à la mise en bibliothèque de code.==",
+        "Suppression de la friction du handover : Le processus élimine les erreurs de traduction humaine et les allers-retours fastidieux entre le design et l'ingénierie."
+      ],
+      "tags": [
+        "design-to-code",
+        "design-system",
+        "ia-generation",
+        "figma",
+        "storybook",
+        "tokens",
+        "experience-machine",
+        "cursor"
+      ],
+      "notes": "",
+      "createdAt": 1774724850935
+    },
+    {
       "id": "1774724673270",
       "url": "https://inclusivedesignprinciples.info/fr/",
       "title": "Sept piliers pour une conception numérique réellement inclusive",
