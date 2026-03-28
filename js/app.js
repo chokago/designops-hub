@@ -243,8 +243,6 @@ async function pushToGitHub() {
     throw e;
   }
 }
-  }
-}
 
 function updateUI() {
   render();
