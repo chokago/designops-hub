@@ -1,4 +1,26 @@
 {
-  "resources": [],
+  "resources": [
+    {
+      "id": "1774711371182",
+      "url": "https://awards.zeroheight.com/voting/a11y-dds",
+      "title": "Best Accessibility - Tesco - Winner 2026 - ZeroHeight Design System Award",
+      "summary": "Tesco permet à plus de 150 équipes de créer des produits numériques cohérents tout en réalisant des économies d'efficacité massives en termes de temps et de ressources",
+      "tldr": "Tesco permet à plus de 150 équipes de créer des produits numériques cohérents tout en réalisant des économies d'efficacité massives en termes de temps et de ressources",
+      "insights": [
+        "Stratégie d'inclusion rigoureuse",
+        "Tests automatisés",
+        "Audits menés par experts externes",
+        "Essais réalisés par des utilisateurs en situation de handicap",
+        "Intégrer l'accessibilité dès la phase de conception initiale",
+        "Transformer la conformité technique en une culture d'innovation proactive"
+      ],
+      "tags": [
+        "design-system",
+        "accessibilite"
+      ],
+      "notes": "",
+      "createdAt": 1774711371182
+    }
+  ],
   "customTags": []
 }
