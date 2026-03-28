@@ -1129,19 +1129,18 @@ function renderTagManagerList() {
     editRow.innerHTML = `
       <div class="tagmgr-edit-fields">
         <input type="text" id="edit-emoji-${t.id}" value="${t.e}" maxlength="2"
-          style="width:44px;text-align:center;font-size:18px;padding:5px 4px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);outline:none;flex-shrink:0;"/>
+          style="width:44px;min-width:44px;flex:none;text-align:center;font-size:18px;padding:5px 4px;"/>
         <input type="text" id="edit-name-${t.id}" value="${t.label}"
-          style="flex:1;min-width:100px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);font-size:13px;outline:none;"/>
+          placeholder="Nom du thème"/>
         <input type="color" id="edit-color-${t.id}" value="${t.color||'#6366F1'}"
-          style="width:40px;height:32px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;padding:2px;background:var(--bg);flex-shrink:0;"/>
+          style="width:40px;min-width:40px;flex:none;height:34px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;padding:2px;background:var(--bg);"/>
       </div>
-      <div style="margin-top:6px;">
-        <label style="font-size:10px;color:var(--text3);display:block;margin-bottom:3px;">Description <span style="font-weight:400;">(optionnelle)</span></label>
-        <textarea id="edit-desc-${t.id}" rows="2"
-          placeholder="À quoi sert ce thème ? Quels types de ressources y classer ?"
-          style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);font-size:11px;font-family:inherit;resize:vertical;line-height:1.5;outline:none;">${t.desc||''}</textarea>
+      <div>
+        <span class="edit-desc-label">Description <span style="font-weight:400;">(optionnelle)</span></span>
+        <textarea id="edit-desc-${t.id}"
+          placeholder="À quoi sert ce thème ? Quels types de ressources y classer ?">${t.desc||''}</textarea>
       </div>
-      <div style="display:flex;gap:6px;margin-top:6px;">
+      <div class="tagmgr-edit-actions">
         <button class="btn primary sm" onclick="saveTagEdit('${t.id}')">Valider</button>
         <button class="btn sm" onclick="toggleTagEdit('${t.id}')">Annuler</button>
       </div>`;
