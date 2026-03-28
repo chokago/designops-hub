@@ -78,6 +78,12 @@
       "label": "Expérience-Machine (MX)",
       "e": "🤖",
       "color": "#6366f1"
+    },
+    {
+      "id": "custom-spatial-ui-mnajcp2x",
+      "label": "Spatial UI",
+      "e": "🛰",
+      "color": "#00a3d7"
     }
   ]
 }
