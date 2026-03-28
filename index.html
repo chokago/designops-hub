@@ -62,7 +62,7 @@
       <!-- Panel GitHub — réductible -->
       <div class="settings-panel" id="gh-panel">
         <button class="settings-panel-toggle" onclick="togglePanel('gh-panel')" type="button">
-          <span>⚙️ GitHub</span>
+          <span>GitHub</span>
           <div class="conn-badge"><span class="conn-dot" id="gh-dot"></span><span id="gh-label">—</span></div>
           <span class="panel-chevron" id="gh-panel-chevron">▾</span>
         </button>
@@ -78,7 +78,7 @@
       <!-- Panel Claude API — réductible -->
       <div class="settings-panel" id="claude-panel">
         <button class="settings-panel-toggle" onclick="togglePanel('claude-panel')" type="button">
-          <span>🤖 Claude API</span>
+          <span>Claude API</span>
           <div class="conn-badge"><span class="conn-dot" id="claude-dot"></span><span id="claude-label">—</span></div>
           <span class="panel-chevron" id="claude-panel-chevron">▾</span>
         </button>
@@ -314,8 +314,8 @@
       </div>
     </div>
     <div class="modal-body">
-      <div id="tagmgr-list"></div>
-      <div style="border-top:1px solid var(--border);margin-top:16px;padding-top:16px;">
+      <!-- Nouveau thème EN PREMIER -->
+      <div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);">
         <div class="m-label" style="margin-bottom:10px;">Nouveau thème</div>
         <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;">
           <div style="flex:0 0 52px;">
@@ -338,6 +338,9 @@
         </div>
         <div class="settings-error" id="new-tag-error" style="margin-top:8px;"></div>
       </div>
+
+      <!-- Liste des thèmes existants EN SECOND -->
+      <div id="tagmgr-list"></div>
     </div>
   </div>
 </div>
