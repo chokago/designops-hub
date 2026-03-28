@@ -1,6 +1,34 @@
 {
   "resources": [
     {
+      "id": "1774723083888",
+      "url": "https://storybook.js.org/blog/storybook-mcp-for-react/",
+      "title": "Storybook MCP : l'IA dopée aux composants React",
+      "summary": "Storybook MCP permet aux agents IA de comprendre et réutiliser vos composants existants au lieu d'en inventer de nouveaux. Il offre des garde-fous via des tests intégrés pour garantir que le code généré respecte vos standards de qualité et d'accessibilité.",
+      "tldr": "Storybook MCP permet aux agents IA de comprendre et réutiliser vos composants existants au lieu d'en inventer de nouveaux. Il offre des garde-fous via des tests intégrés pour garantir que le code généré respecte vos standards de qualité et d'accessibilité.",
+      "insights": [
+        "Intelligence contextuelle : **Les agents accèdent aux métadonnées, aux API et à la documentation des composants pour une réutilisation fidèle et rapide.**",
+        "Réduction du bruit (Slop) : **Empêche l'IA de générer du code incohérent avec vos standards en lui imposant l'usage de vos propres bibliothèques.**",
+        "Gain de performance : Améliore l'utilisation du code de 12,8 % tout en consommant moins de tokens lors des requêtes de génération.",
+        "Aperçus en direct : Intègre des \"Live Stories\" directement dans l'interface de chat de l'agent (ex: GitHub Copilot) pour valider le rendu visuel sans quitter l'IDE.",
+        "==Tests et auto-correction : L'agent peut lancer lui-même des tests de composants et d'accessibilité, puis appliquer des correctifs de manière autonome (self-healing).==",
+        "==Architecture de composition : Permet à l'IA de lire des données provenant de plusieurs Storybooks (système de design, application, tiers) via un seul point d'entrée.==",
+        "Publication sécurisée : Chromatic permet de partager le serveur MCP avec toute l'équipe avec une gestion intégrée des versions et des autorisations sécurisées.",
+        "Disponibilité immédiate : Cette fonctionnalité est disponible dès maintenant pour les projets React utilisant Storybook 10.3+."
+      ],
+      "tags": [
+        "storybook",
+        "ia-generation",
+        "experience-machine",
+        "design-to-code",
+        "accessibilite",
+        "audit-conformite",
+        "design-system"
+      ],
+      "notes": "",
+      "createdAt": 1774723083889
+    },
+    {
       "id": "1774722878978",
       "url": "https://learn.thedesignsystem.guide/p/from-figma-to-interactive-components",
       "title": "Transformer le design Figma en composants interactifs réels",
