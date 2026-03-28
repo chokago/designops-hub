@@ -1,6 +1,33 @@
 {
   "resources": [
     {
+      "id": "1774721959340",
+      "url": "https://www.linkedin.com/pulse/claude-desktop-figma-mcp-complete-setup-guide-2026-garima-agarwal-kreaf/",
+      "title": "Intégration Claude Desktop et Figma MCP : Guide 2026",
+      "summary": "Ce guide explique comment connecter l'IA Claude directement à Figma via le protocole MCP pour automatiser l'analyse et la manipulation de design. Il permet de transformer l'IA en un collaborateur capable de lire et de modifier vos fichiers sources en temps réel.",
+      "tldr": "Ce guide explique comment connecter l'IA Claude directement à Figma via le protocole MCP pour automatiser l'analyse et la manipulation de design. Il permet de transformer l'IA en un collaborateur capable de lire et de modifier vos fichiers sources en temps réel.",
+      "insights": [
+        "Interaction directe via MCP : Le protocole permet à Claude de s'affranchir du copier-coller en accédant directement à l'arborescence des calques Figma.",
+        "Configuration technique requise : L'installation nécessite la modification d'un fichier de configuration JSON dans **__Claude Desktop__** pour pointer vers le serveur MCP de Figma.",
+        "Automatisation de l'inspection : L'IA peut désormais lister les styles, extraire des tokens et vérifier la cohérence d'un fichier sans intervention humaine.",
+        "Collaboration bidirectionnelle : Au-delà de la simple lecture, cette configuration permet à l'IA de suggérer ou d'appliquer des modifications de propriétés directement dans l'outil.",
+        "==Optimisation du Handover : Claude peut générer des documentations techniques ou du code en comprenant parfaitement le contexte visuel et structurel du design.==",
+        "Sécurisation des accès : Le guide souligne l'importance de la gestion des Personal Access Tokens (PAT) de Figma pour sécuriser la connexion.",
+        "Évolution du rôle du designer : **__Le design devient \"machine-readable\"__**, transformant la pratique vers de l'orchestration assistée par agent."
+      ],
+      "tags": [
+        "ia-generation",
+        "figma",
+        "experience-machine",
+        "design-to-code",
+        "veille",
+        "design-system",
+        "custom-roi-impact-mnaj7d7r"
+      ],
+      "notes": "",
+      "createdAt": 1774721959342
+    },
+    {
       "id": "1774721579997",
       "url": "https://awards.zeroheight.com/voting/docs-ebay",
       "title": "Skin d'eBay : documentation unifiée pour marketplace mondiale",
