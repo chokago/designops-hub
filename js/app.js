@@ -147,14 +147,48 @@ async function ghWrite(json, sha) {
 }
 
 // ════════════════════════════════════════════════════════════
+// CACHE — stale-while-revalidate
+// ════════════════════════════════════════════════════════════
+const CACHE_KEY = 'doh-cache';
+
+function saveCache() {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ resources, customTags, ts: Date.now() }));
+  } catch(e) { /* localStorage plein — on ignore */ }
+}
+
+function loadCache() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return false;
+    const { resources: r, customTags: ct } = JSON.parse(raw);
+    if (Array.isArray(r)) {
+      resources  = r;
+      customTags = Array.isArray(ct) ? ct : [];
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+// ════════════════════════════════════════════════════════════
 // LOAD / PUSH
 // ════════════════════════════════════════════════════════════
 async function loadFromGitHub() {
   if (!cfg.repo || !cfg.token) { setConnBadge('gh','none'); return; }
-  setConnBadge('gh','busy','chargement…');
+
+  // 1. Afficher le cache immédiatement si disponible (stale)
+  const hadCache = loadCache();
+  if (hadCache) {
+    updateUI();
+    setConnBadge('gh','busy','mise à jour…');
+  } else {
+    setConnBadge('gh','busy','chargement…');
+  }
+
+  // 2. Fetch GitHub en arrière-plan (revalidate)
   try {
     const { json } = await ghRead();
-    // Le JSON contient { resources, customTags } ou simplement []
     if (Array.isArray(json)) {
       resources  = json;
       customTags = [];
@@ -162,12 +196,15 @@ async function loadFromGitHub() {
       resources  = json.resources  || [];
       customTags = json.customTags || [];
     }
+    saveCache();
     setConnBadge('gh','ok','synced');
     setConnError('gh', null);
     updateUI();
   } catch(e) {
     setConnBadge('gh','error','erreur');
     setConnError('gh', parseGhError(e));
+    // Si on avait un cache, les données stale restent affichées
+    if (!hadCache) updateUI();
   }
 }
 
@@ -177,6 +214,7 @@ async function pushToGitHub() {
   try {
     const { sha } = await ghRead();
     await ghWrite({ resources, customTags }, sha);
+    saveCache(); // mettre à jour le cache après chaque push réussi
     setConnBadge('gh','ok','synced');
   } catch(e) {
     setConnBadge('gh','error','erreur');
@@ -254,6 +292,40 @@ function toast(msg, type='ok') {
 }
 
 // ════════════════════════════════════════════════════════════
+// PANELS RÉDUCTIBLES
+// ════════════════════════════════════════════════════════════
+function togglePanel(panelId) {
+  const body    = document.getElementById(`${panelId}-body`);
+  const chevron = document.getElementById(`${panelId}-chevron`);
+  const panel   = document.getElementById(panelId);
+  if (!body) return;
+  const isOpen = body.style.display !== 'none';
+  body.style.display    = isOpen ? 'none' : '';
+  if (chevron) chevron.textContent = isOpen ? '▸' : '▾';
+  panel.classList.toggle('collapsed', isOpen);
+}
+
+function collapsePanel(panelId) {
+  const body    = document.getElementById(`${panelId}-body`);
+  const chevron = document.getElementById(`${panelId}-chevron`);
+  const panel   = document.getElementById(panelId);
+  if (!body) return;
+  body.style.display = 'none';
+  if (chevron) chevron.textContent = '▸';
+  panel?.classList.add('collapsed');
+}
+
+function expandPanel(panelId) {
+  const body    = document.getElementById(`${panelId}-body`);
+  const chevron = document.getElementById(`${panelId}-chevron`);
+  const panel   = document.getElementById(panelId);
+  if (!body) return;
+  body.style.display = '';
+  if (chevron) chevron.textContent = '▾';
+  panel?.classList.remove('collapsed');
+}
+
+// ════════════════════════════════════════════════════════════
 // CONFIG
 // ════════════════════════════════════════════════════════════
 function loadConfig() {
@@ -281,11 +353,14 @@ async function saveGitHub() {
     const { json } = await ghRead();
     if (Array.isArray(json)) { resources = json; customTags = []; }
     else { resources = json.resources||[]; customTags = json.customTags||[]; }
+    saveCache();
     setConnBadge('gh','ok','synced');
     toast(`GitHub connecté — ${resources.length} ressource${resources.length>1?'s':''} chargée${resources.length>1?'s':''}`);
     updateUI();
+    collapsePanel('gh-panel'); // collapse automatique après succès
   } catch(e) {
     const m = parseGhError(e); setConnBadge('gh','error','erreur'); setConnError('gh',m); toast(m,'err');
+    expandPanel('gh-panel'); // s'assurer que l'erreur est visible
   }
   btn.disabled = false; btn.textContent = 'Tester la connexion';
 }
@@ -313,8 +388,10 @@ async function saveClaude() {
     setConnBadge('claude','ok','validée');
     toast('Clé Claude validée ✓');
     updateAddPanelMode();
+    collapsePanel('claude-panel'); // collapse automatique après succès
   } catch(e) {
     const m = parseClaudeError(e); setConnBadge('claude','error','erreur'); setConnError('claude',m); toast(m,'err');
+    expandPanel('claude-panel');
   }
   btn.disabled = false; btn.textContent = 'Tester la clé';
 }
@@ -387,15 +464,58 @@ function renderTagFilters() {
   const c = document.getElementById('tag-filters');
   c.innerHTML = '';
   document.getElementById('ct-all').textContent = resources.length;
-  allTags().forEach(t => {
-    const n = resources.filter(r=>r.tags?.includes(t.id)).length;
-    if (!n) return;
+
+  // Collecter TOUS les tag-ids utilisés dans les ressources,
+  // y compris les tags orphelins (présents dans le JSON mais pas dans allTags())
+  const usageMap = {};
+  resources.forEach(r => {
+    (r.tags || []).forEach(tid => {
+      usageMap[tid] = (usageMap[tid] || 0) + 1;
+    });
+  });
+
+  // Construire la liste complète : tags connus + tags orphelins
+  const knownIds = new Set(allTags().map(t => t.id));
+  const orphanIds = Object.keys(usageMap).filter(id => !knownIds.has(id));
+  const orphanTags = orphanIds.map(id => ({
+    id, label: id, e: '🏷️', color: '#888780',
+    desc: 'Tag non reconnu dans la liste actuelle.',
+  }));
+
+  // Liste triée par usage décroissant
+  const allUsed = [...allTags(), ...orphanTags]
+    .filter(t => usageMap[t.id] > 0)
+    .sort((a, b) => usageMap[b.id] - usageMap[a.id]);
+
+  if (!allUsed.length) return;
+
+  const MAX_VISIBLE = 6;
+  const showAll = c.dataset.expanded === 'true';
+  const visible = showAll ? allUsed : allUsed.slice(0, MAX_VISIBLE);
+
+  visible.forEach(t => {
+    const n = usageMap[t.id];
     const b = document.createElement('button');
-    b.className = 'filter-btn' + (activeFilter===t.id ? ' active' : '');
+    b.className = 'filter-btn' + (activeFilter === t.id ? ' active' : '');
     b.innerHTML = `${t.e} ${t.label} <span class="fc">${n}</span>`;
-    b.onclick = () => { setFilter(t.id,b); closeSidebar(); };
+    b.onclick = () => { setFilter(t.id, b); closeSidebar(); };
     c.appendChild(b);
   });
+
+  // Bouton "Voir tous / Réduire" si > MAX_VISIBLE
+  if (allUsed.length > MAX_VISIBLE) {
+    const hidden = allUsed.length - MAX_VISIBLE;
+    const btn = document.createElement('button');
+    btn.className = 'filter-expand-btn';
+    btn.innerHTML = showAll
+      ? '↑ Réduire'
+      : `↓ Voir tous les thèmes (${allUsed.length})`;
+    btn.onclick = () => {
+      c.dataset.expanded = showAll ? 'false' : 'true';
+      renderTagFilters();
+    };
+    c.appendChild(btn);
+  }
 }
 
 function setFilter(id, btn) {
@@ -1185,7 +1305,12 @@ renderTagFilters();
 render();
 updateAddPanelMode();
 
+// Badges de statut au chargement
 if (cfg.anthropicKey) setConnBadge('claude','ok','validée');
 else setConnBadge('claude','none','—');
+
+// Auto-collapse des panels si déjà configurés
+if (cfg.repo && cfg.token) collapsePanel('gh-panel');
+if (cfg.anthropicKey)      collapsePanel('claude-panel');
 
 loadFromGitHub();

@@ -57,32 +57,40 @@
       <div id="tag-filters"></div>
     </div>
 
-    <div class="side-section" style="margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:10px;">
+    <div class="side-section" style="margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:8px;">
 
-      <div class="settings-panel">
-        <div class="settings-panel-head">
-          <h4>⚙️ GitHub</h4>
+      <!-- Panel GitHub — réductible -->
+      <div class="settings-panel" id="gh-panel">
+        <button class="settings-panel-toggle" onclick="togglePanel('gh-panel')" type="button">
+          <span>⚙️ GitHub</span>
           <div class="conn-badge"><span class="conn-dot" id="gh-dot"></span><span id="gh-label">—</span></div>
+          <span class="panel-chevron" id="gh-panel-chevron">▾</span>
+        </button>
+        <div class="settings-panel-body" id="gh-panel-body">
+          <div class="settings-row"><label>Owner/Repo</label><input type="text" id="cfg-repo" placeholder="username/repo-name"/></div>
+          <div class="settings-row"><label>Personal Access Token</label><input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx"/></div>
+          <div class="settings-row"><label>Branche</label><input type="text" id="cfg-branch" placeholder="main"/></div>
+          <div class="settings-error" id="gh-error"></div>
+          <button class="settings-save" id="gh-save-btn" onclick="saveGitHub()">Tester la connexion</button>
         </div>
-        <div class="settings-row"><label>Owner/Repo</label><input type="text" id="cfg-repo" placeholder="username/repo-name"/></div>
-        <div class="settings-row"><label>Personal Access Token</label><input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx"/></div>
-        <div class="settings-row"><label>Branche</label><input type="text" id="cfg-branch" placeholder="main"/></div>
-        <div class="settings-error" id="gh-error"></div>
-        <button class="settings-save" id="gh-save-btn" onclick="saveGitHub()">Tester la connexion</button>
       </div>
 
-      <div class="settings-panel">
-        <div class="settings-panel-head">
-          <h4>🤖 Claude API</h4>
+      <!-- Panel Claude API — réductible -->
+      <div class="settings-panel" id="claude-panel">
+        <button class="settings-panel-toggle" onclick="togglePanel('claude-panel')" type="button">
+          <span>🤖 Claude API</span>
           <div class="conn-badge"><span class="conn-dot" id="claude-dot"></span><span id="claude-label">—</span></div>
+          <span class="panel-chevron" id="claude-panel-chevron">▾</span>
+        </button>
+        <div class="settings-panel-body" id="claude-panel-body">
+          <div class="settings-row"><label>Anthropic API Key</label><input type="password" id="cfg-anthropic" placeholder="sk-ant-xxxxxxxxxxxx"/></div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.5;margin-bottom:8px;">
+            Stockée dans ton navigateur. Jamais dans le repo.
+            <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--accent);text-decoration:none;">Obtenir une clé →</a>
+          </div>
+          <div class="settings-error" id="claude-error"></div>
+          <button class="settings-save" id="claude-save-btn" onclick="saveClaude()">Tester la clé</button>
         </div>
-        <div class="settings-row"><label>Anthropic API Key</label><input type="password" id="cfg-anthropic" placeholder="sk-ant-xxxxxxxxxxxx"/></div>
-        <div style="font-size:10px;color:var(--text3);line-height:1.5;margin-bottom:8px;">
-          Stockée dans ton navigateur. Jamais dans le repo.
-          <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--accent);text-decoration:none;">Obtenir une clé →</a>
-        </div>
-        <div class="settings-error" id="claude-error"></div>
-        <button class="settings-save" id="claude-save-btn" onclick="saveClaude()">Tester la clé</button>
       </div>
 
     </div>

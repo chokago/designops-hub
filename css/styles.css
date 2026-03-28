@@ -1072,3 +1072,67 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
   gap: 6px;
   align-items: center;
 }
+
+/* ════════════════════════════════════════════════════════════
+   SETTINGS PANEL — réductible
+════════════════════════════════════════════════════════════ */
+.settings-panel-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  text-align: left;
+}
+.settings-panel-toggle:hover { color: var(--text); }
+
+.panel-chevron {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--text3);
+  flex-shrink: 0;
+}
+
+.settings-panel.collapsed .settings-panel-toggle {
+  padding-bottom: 0;
+}
+
+.settings-panel-body {
+  /* ouvert par défaut, JS le ferme */
+}
+
+/* ════════════════════════════════════════════════════════════
+   SIDEBAR THÈMES — zone scrollable + bouton expand
+════════════════════════════════════════════════════════════ */
+#tag-filters {
+  max-height: 240px;
+  overflow-y: auto;
+  /* scrollbar discrète */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+#tag-filters::-webkit-scrollbar { width: 4px; }
+#tag-filters::-webkit-scrollbar-track { background: transparent; }
+#tag-filters::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.filter-expand-btn {
+  width: 100%;
+  padding: 5px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 11px;
+  color: var(--text3);
+  text-align: left;
+  transition: color .12s;
+  margin-top: 2px;
+}
+.filter-expand-btn:hover { color: var(--accent); }
