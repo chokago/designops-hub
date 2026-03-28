@@ -1,6 +1,34 @@
 {
   "resources": [
     {
+      "id": "1774725291701",
+      "url": "https://www.devoteam.com/fr/expert-view/design-system-et-accessibilite/",
+      "title": "Design System : levier systémique de l'accessibilité numérique",
+      "summary": "Cette ressource explore comment le Design System permet de déployer l'accessibilité à grande échelle, passant d'une contrainte technique isolée à un standard de qualité produit partagé. Elle offre des retours d'expérience concrets sur la gouvernance, l'acculturation des équipes et la mesure d'impact au sein de grandes organisations.",
+      "tldr": "Cette ressource explore comment le Design System permet de déployer l'accessibilité à grande échelle, passant d'une contrainte technique isolée à un standard de qualité produit partagé. Elle offre des retours d'expérience concrets sur la gouvernance, l'acculturation des équipes et la mesure d'impact au sein de grandes organisations.",
+      "insights": [
+        "Approche systémique indispensable : L'accessibilité ne peut plus être traitée comme un sujet isolé ; elle doit être verrouillée dès la conception des composants dans le Design System.",
+        "==Le DS comme facilitateur : Le système de design agit comme un fournisseur de briques accessibles (couleurs contrastées, sémantique HTML), évitant aux équipes de \"rattraper\" l'accessibilité en fin de cycle.==",
+        "Responsabilité partagée : Si le Design System livre des composants conformes,** les équipes produits restent garantes de leur implémentation contextuelle et du contenu final**.",
+        "Acculturation par l'onboarding : **Intégrer les notions d'accessibilité dès l'arrivée d'un nouveau collaborateur (Product Ops) est plus efficace et moins coûteux qu'une formation tardive**.",
+        "L'IA comme nouveau \"client\" : Un Design System accessible profite aux humains mais aussi aux IA (comme les lecteurs d'écran intelligents) qui ne peuvent pas interpréter des interfaces mal structurées.",
+        "==Au-delà du score technique : Un composant peut être techniquement conforme aux critères WCAG mais échouer lors de tests utilisateurs réels avec différents lecteurs d'écran.==",
+        "Gain financier et d'image : Anticiper l'accessibilité via le DS évite des pénalités législatives lourdes (directive européenne) et préserve l'image de marque de l'entreprise.",
+        "Mesure par l'audit : L'impact se mesure moins par le nombre de composants que par le taux de conformité révélé lors des audits de projets réels utilisant le système."
+      ],
+      "tags": [
+        "design-system",
+        "accessibilite",
+        "inclusivite",
+        "gouvernance",
+        "audit-conformite",
+        "veille",
+        "custom-roi-impact-mnaj7d7r"
+      ],
+      "notes": "",
+      "createdAt": 1774725291704
+    },
+    {
       "id": "1774725081514",
       "url": "https://www.linkedin.com/posts/skd24_designsystems-designops-figma-activity-7416072985926676480-cyx_?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
       "title": "Delta : le changelog automatisé pour Figma Variables",
