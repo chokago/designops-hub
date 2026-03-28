@@ -147,13 +147,16 @@ async function ghWrite(json, sha) {
 }
 
 // ════════════════════════════════════════════════════════════
-// CACHE — stale-while-revalidate
+// CACHE — ressources uniquement (pas les customTags)
+// Les tags sont toujours fetchés frais depuis GitHub
+// pour éviter de travailler sur une version périmée après
+// une modification de description ou de nom de thème.
 // ════════════════════════════════════════════════════════════
-const CACHE_KEY = 'doh-cache';
+const CACHE_KEY = 'doh-resources-cache';
 
 function saveCache() {
   try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ resources, customTags, ts: Date.now() }));
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ resources, ts: Date.now() }));
   } catch(e) { /* localStorage plein — on ignore */ }
 }
 
@@ -161,10 +164,10 @@ function loadCache() {
   try {
     const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return false;
-    const { resources: r, customTags: ct } = JSON.parse(raw);
+    const { resources: r } = JSON.parse(raw);
     if (Array.isArray(r)) {
-      resources  = r;
-      customTags = Array.isArray(ct) ? ct : [];
+      resources = r;
+      // customTags intentionnellement non chargé depuis le cache
       return true;
     }
   } catch(e) {}
@@ -177,7 +180,8 @@ function loadCache() {
 async function loadFromGitHub() {
   if (!cfg.repo || !cfg.token) { setConnBadge('gh','none'); return; }
 
-  // 1. Afficher le cache immédiatement si disponible (stale)
+  // 1. Afficher les ressources cachées immédiatement si disponibles
+  //    Les customTags sont toujours attendus depuis GitHub (pas de cache)
   const hadCache = loadCache();
   if (hadCache) {
     updateUI();
@@ -186,7 +190,7 @@ async function loadFromGitHub() {
     setConnBadge('gh','busy','chargement…');
   }
 
-  // 2. Fetch GitHub en arrière-plan (revalidate)
+  // 2. Fetch GitHub — ressources + tags frais
   try {
     const { json } = await ghRead();
     if (Array.isArray(json)) {
@@ -196,14 +200,13 @@ async function loadFromGitHub() {
       resources  = json.resources  || [];
       customTags = json.customTags || [];
     }
-    saveCache();
+    saveCache(); // cache ressources uniquement (voir saveCache)
     setConnBadge('gh','ok','synced');
     setConnError('gh', null);
     updateUI();
   } catch(e) {
     setConnBadge('gh','error','erreur');
     setConnError('gh', parseGhError(e));
-    // Si on avait un cache, les données stale restent affichées
     if (!hadCache) updateUI();
   }
 }
@@ -214,7 +217,7 @@ async function pushToGitHub() {
   try {
     const { sha } = await ghRead();
     await ghWrite({ resources, customTags }, sha);
-    saveCache();
+    saveCache(); // met à jour le cache ressources
     setConnBadge('gh','ok','synced');
   } catch(e) {
     // Retry automatique sur conflit SHA (modification concurrente)
@@ -227,9 +230,8 @@ async function pushToGitHub() {
         await ghWrite({ resources, customTags }, freshSha);
         saveCache();
         setConnBadge('gh','ok','synced');
-        return; // retry réussi
+        return;
       } catch(e2) {
-        // Le retry a aussi échoué — on remonte l'erreur
         setConnBadge('gh','error','erreur');
         setConnError('gh', parseGhError(e2));
         throw e2;
@@ -238,6 +240,8 @@ async function pushToGitHub() {
     setConnBadge('gh','error','erreur');
     setConnError('gh', parseGhError(e));
     throw e;
+  }
+}
   }
 }
 
