@@ -256,13 +256,6 @@
       "e": "🧠",
       "color": "#ed719e",
       "desc": "Dimension humaine et éthique du design. Couvre la diversité, l'équité, la réduction des biais cognitifs et le design pour tous les genres/cultures."
-    },
-    {
-      "id": "custom-spatial-ui-mnajcp2x",
-      "label": "Spatial UI",
-      "e": "🛰",
-      "color": "#0056d6",
-      "desc": "Interfaces immersives et 3D (AR/VR/XR). Gestion de la profondeur, du regard (eye-tracking), et des environnements spatiaux (type Vision Pro)."
     }
   ]
 }
