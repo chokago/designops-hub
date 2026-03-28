@@ -91,13 +91,15 @@
       "id": "custom-roi-impact-mnaj7d7r",
       "label": "ROI & Impact",
       "e": "🎯",
-      "color": "#e32400"
+      "color": "#e32400",
+      "desc": "Dimension humaine et éthique du design. Couvre la diversité, l'équité, la réduction des biais cognitifs et le design pour tous les genres/cultures."
     },
     {
       "id": "custom-inclusivit--mnaj8xer",
       "label": "Inclusivité",
       "e": "🧠",
-      "color": "#ed719e"
+      "color": "#ed719e",
+      "desc": "Dimension humaine et éthique du design. Couvre la diversité, l'équité, la réduction des biais cognitifs et le design pour tous les genres/cultures."
     },
     {
       "id": "custom-audit-conformit--mnaj9yh5",
