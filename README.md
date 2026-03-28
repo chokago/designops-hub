@@ -1,4 +1,4 @@
-# DesignOps Knowledge Hub — Cdiscount
+# DesignOps Knowledge Hub — Chokago
 
 Hub de veille Design Ops alimentée par IA (Claude), hébergée sur GitHub Pages, persistée dans un fichier JSON versionné sur GitHub.
 
