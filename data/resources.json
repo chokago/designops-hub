@@ -119,7 +119,8 @@
       "id": "custom-spatial-ui-mnajcp2x",
       "label": "Spatial UI",
       "e": "🛰",
-      "color": "#0056d6"
+      "color": "#0056d6",
+      "desc": "Interfaces immersives et 3D (AR/VR/XR). Gestion de la profondeur, du regard (eye-tracking), et des environnements spatiaux (type Vision Pro)."
     }
   ]
 }
