@@ -7,11 +7,11 @@
       "summary": "pAIella transforme instantanément des maquettes Figma ou des croquis en code de production accessible grâce à un LLM entraîné sur le système Saffron. Cet outil agit comme un pont intelligent entre le design et l'ingénierie via le protocole MCP (Model Context Protocol).",
       "tldr": "pAIella transforme instantanément des maquettes Figma ou des croquis en code de production accessible grâce à un LLM entraîné sur le système Saffron. Cet outil agit comme un pont intelligent entre le design et l'ingénierie via le protocole MCP (Model Context Protocol).",
       "insights": [
-        "Génération de code \"production-ready\" : Traduction automatique des inputs design en code UI finalisé, incluant l'accessibilité et les tests.",
+        "**__Génération de code \"production-ready\"__** : Traduction automatique des inputs design en code UI finalisé, incluant l'accessibilité et les tests.",
         "LLM spécialisé (Ask Saffron) : L'IA est spécifiquement entraînée sur la bibliothèque de composants et les standards du système Saffron.",
-        "Intégration native aux IDE : Connexion directe avec des outils comme Cursor, GitHub Copilot et VS Code via un serveur MCP dédié.",
-        "Validation visuelle en temps réel : Le système garantit une fidélité absolue au design original lors de la génération du code.",
-        "Architecture agnostique : La solution est conçue pour s'adapter à différents frameworks de développement sans perdre en cohérence.",
+        "**__Intégration native aux IDE__** : Connexion directe avec des outils comme Cursor, GitHub Copilot et VS Code via un serveur MCP dédié.",
+        "==Validation visuelle en temps réel : Le système garantit une fidélité absolue au design original lors de la génération du code.==",
+        "==Architecture agnostique : La solution est conçue pour s'adapter à différents frameworks de développement sans perdre en cohérence.==",
         "Productivité augmentée : Réduction drastique des goulots d'étranglement lors du passage de la conception à l'implémentation technique.",
         "Le système comme partenaire : Transition du Design System \"bibliothèque statique\" vers un véritable \"partenaire de productivité intelligent\"."
       ],
