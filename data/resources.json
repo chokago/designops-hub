@@ -66,6 +66,12 @@
       "label": "Inclusivité",
       "e": "🧠",
       "color": "#ed719e"
+    },
+    {
+      "id": "custom-audit-conformit--mnaj9yh5",
+      "label": "Audit & Conformité",
+      "e": "⚖️",
+      "color": "#444444"
     }
   ]
 }
