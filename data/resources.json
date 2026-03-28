@@ -7,20 +7,22 @@
       "summary": "Ce guide décrypte comment les géants de la tech utilisent des systèmes orchestrés par l'IA et des tokens sémantiques pour maintenir une cohérence visuelle parfaite à une échelle massive.",
       "tldr": "Ce guide décrypte comment les géants de la tech utilisent des systèmes orchestrés par l'IA et des tokens sémantiques pour maintenir une cohérence visuelle parfaite à une échelle massive.",
       "insights": [
-        "Sémantique avant tout : L'abandon des noms de couleurs arbitraires au profit de tokens sémantiques (ex: surface-primary) permet d'automatiser le passage entre mode clair, sombre et contrasté.",
-        "L'IA comme gardienne : En 2026, les systèmes intègrent l'IA pour détecter les doublons de tokens, corriger les erreurs de nommage et prédire les ruptures de cohérence avant même le déploiement.",
+        "Sémantique avant tout : L'abandon des noms de couleurs arbitraires au profit de tokens sémantiques (ex: `surface-primary`) permet d'automatiser le passage entre mode clair, sombre et contrasté.",
+        "__**L'IA comme gardienne**__ : En 2026, les systèmes intègrent l'IA pour détecter les doublons de tokens, corriger les erreurs de nommage et prédire les ruptures de cohérence avant même le déploiement.",
         "Systèmes multi-marques : La tendance est à l'architecture \"Core + Variants\", où un système central (primitives) alimente plusieurs sous-marques avec une logique d'héritage intelligente.",
-        "Accessibilité native : Des systèmes comme IBM Carbon ou Adobe Spectrum placent l'accessibilité au niveau des composants atomiques, rendant la conformité automatique pour les développeurs.",
+        "**__Accessibilité native__** : Des systèmes comme IBM Carbon ou Adobe Spectrum placent l'accessibilité au niveau des composants atomiques, rendant la conformité automatique pour les développeurs.",
         "Métaphore physique : Material Design 3 continue d'influencer le marché avec sa gestion de la profondeur et du mouvement, créant des interfaces plus intuitives par mimétisme avec le monde réel.",
-        "Focalisation e-commerce : Shopify Polaris démontre l'importance d'un système dédié aux flux transactionnels, optimisant la conversion par des composants ultra-spécialisés pour le checkout.",
+        "Focalisation e-commerce : ==Shopify Polaris démontre l'importance d'un système dédié aux flux transactionnels, optimisant la conversion par des composants ultra-spécialisés pour le checkout.==",
         "Tokens d'élévation hybrides : L'approche d'Atlassian (mélange de couleurs transparentes et d'ombres) devient le standard pour gérer la profondeur de manière cohérente sur tous les fonds.",
-        "Le système comme produit : Le DesignOps ne gère plus une simple bibliothèque UI, mais un véritable produit stratégique doté de son propre cycle de vie et de sa gouvernance."
+        "Le système comme produit : ==Le DesignOps ne gère plus une simple bibliothèque UI, mais un véritable produit stratégique doté de son propre cycle de vie et de sa gouvernance==."
       ],
       "tags": [
         "design-system",
         "accessibilite",
         "ia-generation",
-        "tokens"
+        "tokens",
+        "veille",
+        "custom-e-commerce-mnahvuo0"
       ],
       "notes": "",
       "createdAt": 1774712200968
@@ -28,20 +30,23 @@
     {
       "id": "1774711371182",
       "url": "https://awards.zeroheight.com/voting/a11y-dds",
-      "title": "Best Accessibility - Tesco - Winner 2026 - ZeroHeight Design System Award",
+      "title": "Tesco Design System : l'accessibilité comme standard systémique",
       "summary": "Tesco permet à plus de 150 équipes de créer des produits numériques cohérents tout en réalisant des économies d'efficacité massives en termes de temps et de ressources",
-      "tldr": "Tesco permet à plus de 150 équipes de créer des produits numériques cohérents tout en réalisant des économies d'efficacité massives en termes de temps et de ressources",
+      "tldr": "Cette étude de cas détaille comment Tesco a intégré l'inclusion nativement pour soutenir plus de 150 équipes produits. Elle démontre qu'une accessibilité rigoureuse réduit la dette technique tout en optimisant l'efficacité opérationnelle à grande échelle.",
       "insights": [
-        "Stratégie d'inclusion rigoureuse",
-        "Tests automatisés",
-        "Audits menés par experts externes",
-        "Essais réalisés par des utilisateurs en situation de handicap",
-        "Intégrer l'accessibilité dès la phase de conception initiale",
-        "Transformer la conformité technique en une culture d'innovation proactive"
+        "Conception inclusive native : __**Chaque composant est pensé dès le premier croquis**__ pour respecter les normes WCAG AA.",
+        "Gouvernance intégrée : __**L'accessibilité est non-négociable**__, avec des checklists et des design tokens spécifiques intégrés aux flux de travail.",
+        "**Tests multi-couches** : Combinaison d'outils automatisés (axe-core), de tests manuels (lecteurs d'écran) et de navigation au clavier.",
+        "**__Validation utilisateur réelle__** : Le système est validé concrètement par des tests effectués avec des personnes en situation de handicap.",
+        "Expertise externe : Partenariat stratégique avec des consultants spécialisés (Tetralogical) pour auditer et certifier les composants.",
+        "==Culture de responsabilité partagée : Transformation de la conformité \"réactive\" en une innovation \"proactive\" grâce à des champions de l'accessibilité.==",
+        "Impact business massif : Le système a permis d'économiser l'équivalent de 190 rôles à plein temps en une seule année grâce à la standardisation."
       ],
       "tags": [
         "design-system",
-        "accessibilite"
+        "accessibilite",
+        "gouvernance",
+        "custom-roi-impact-mnaj7d7r"
       ],
       "notes": "",
       "createdAt": 1774711371182
@@ -53,6 +58,36 @@
       "label": "E-commerce",
       "e": "🛒",
       "color": "#5e30eb"
+    },
+    {
+      "id": "custom-roi-impact-mnaj7d7r",
+      "label": "ROI & Impact",
+      "e": "🎯",
+      "color": "#e32400"
+    },
+    {
+      "id": "custom-inclusivit--mnaj8xer",
+      "label": "Inclusivité",
+      "e": "🧠",
+      "color": "#ed719e"
+    },
+    {
+      "id": "custom-audit-conformit--mnaj9yh5",
+      "label": "Audit & Conformité",
+      "e": "⚖️",
+      "color": "#444444"
+    },
+    {
+      "id": "custom-exp-rience-machine-mx--mnajaphb",
+      "label": "Expérience-Machine (MX)",
+      "e": "🤖",
+      "color": "#6366f1"
+    },
+    {
+      "id": "custom-spatial-ui-mnajcp2x",
+      "label": "Spatial UI",
+      "e": "🛰",
+      "color": "#0056d6"
     }
   ]
 }
