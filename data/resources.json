@@ -47,5 +47,12 @@
       "createdAt": 1774711371182
     }
   ],
-  "customTags": []
+  "customTags": [
+    {
+      "id": "custom-e-commerce-mnahvuo0",
+      "label": "E-commerce",
+      "e": "🛒",
+      "color": "#5e30eb"
+    }
+  ]
 }
