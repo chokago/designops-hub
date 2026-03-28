@@ -214,9 +214,27 @@ async function pushToGitHub() {
   try {
     const { sha } = await ghRead();
     await ghWrite({ resources, customTags }, sha);
-    saveCache(); // mettre à jour le cache après chaque push réussi
+    saveCache();
     setConnBadge('gh','ok','synced');
   } catch(e) {
+    // Retry automatique sur conflit SHA (modification concurrente)
+    const isShaConflict = (e.message||'').includes('does not match')
+      || (e.message||'').includes('409')
+      || (e.message||'').includes('conflict');
+    if (isShaConflict) {
+      try {
+        const { sha: freshSha } = await ghRead();
+        await ghWrite({ resources, customTags }, freshSha);
+        saveCache();
+        setConnBadge('gh','ok','synced');
+        return; // retry réussi
+      } catch(e2) {
+        // Le retry a aussi échoué — on remonte l'erreur
+        setConnBadge('gh','error','erreur');
+        setConnError('gh', parseGhError(e2));
+        throw e2;
+      }
+    }
     setConnBadge('gh','error','erreur');
     setConnError('gh', parseGhError(e));
     throw e;
@@ -397,11 +415,15 @@ async function saveClaude() {
 }
 
 function parseGhError(e) {
-  const m = e.message||'';
+  const m = e.message || '';
   if (m.includes('404'))  return 'Repo introuvable. Format attendu : "username/repo-name".';
   if (m.includes('401'))  return 'Token invalide ou expiré.';
   if (m.includes('403'))  return 'Accès refusé. Vérifie les permissions du token (Contents: Read & Write).';
-  return `Erreur réseau : ${m.slice(0,60)}`;
+  if (m.includes('does not match') || m.includes('409') || m.includes('conflict'))
+    return 'Conflit de synchronisation — le fichier a été modifié ailleurs. Recharge la page pour resynchroniser.';
+  if (m.includes('fetch') || m.includes('Failed to fetch') || m.includes('NetworkError'))
+    return 'Erreur réseau. Vérifie ta connexion internet.';
+  return `Erreur GitHub : ${m.slice(0, 80)}`;
 }
 function parseClaudeError(e) {
   const m = (e.message||'').toLowerCase();
@@ -611,8 +633,9 @@ async function addFromUrl() {
     showStatus('Ressource ajoutée ✓','ok');
     toast('Ressource ajoutée et sauvegardée sur GitHub');
   } catch(e) {
-    showStatus('Erreur : '+e.message,'err');
-    toast(e.message,'err');
+    const msg = e.message || 'Erreur inconnue';
+    showStatus(msg, 'err');
+    toast(msg, 'err');
   }
   setLoading('btn-url',false);
 }
@@ -629,8 +652,9 @@ async function addFromText() {
     showStatus('Ressource ajoutée ✓','ok');
     toast('Ressource ajoutée et sauvegardée');
   } catch(e) {
-    showStatus('Erreur : '+e.message,'err');
-    toast(e.message,'err');
+    const msg = e.message || 'Erreur inconnue';
+    showStatus(msg, 'err');
+    toast(msg, 'err');
   }
   setLoading('btn-text',false);
 }

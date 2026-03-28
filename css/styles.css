@@ -245,6 +245,8 @@ aside {
   border-radius: var(--r);
   padding: 6px 8px;
   margin-bottom: 8px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .settings-error.visible { display: block; }
 
