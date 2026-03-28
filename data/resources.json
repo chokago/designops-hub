@@ -1,6 +1,33 @@
 {
   "resources": [
     {
+      "id": "1774725081514",
+      "url": "https://www.linkedin.com/posts/skd24_designsystems-designops-figma-activity-7416072985926676480-cyx_?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
+      "title": "Delta : le changelog automatisé pour Figma Variables",
+      "summary": "Ce plugin Figma agit comme un système de contrôle de version (Git) pour suivre précisément les modifications de styles et de variables au sein de vos fichiers. Il permet de générer instantanément des notes de mise à jour claires en Markdown pour synchroniser parfaitement les designers et les développeurs.",
+      "tldr": "Ce plugin Figma agit comme un système de contrôle de version (Git) pour suivre précisément les modifications de styles et de variables au sein de vos fichiers. Il permet de générer instantanément des notes de mise à jour claires en Markdown pour synchroniser parfaitement les designers et les développeurs.",
+      "insights": [
+        "Suivi automatisé et précis : Delta détecte sans effort les ajouts, suppressions et modifications effectués sur les styles locaux (couleurs, textes, effets) et les variables.",
+        "**Comparaison visuelle \"Avant/Après\" : L'outil affiche les anciennes et nouvelles valeurs côte à côte, facilitant la compréhension immédiate des ajustements de codes hexadécimaux.**",
+        "**Filtrage intelligent des données : Le plugin distingue les changements visuels critiques des simples mises à jour de métadonnées (descriptions, scopes) pour garder un changelog pertinent.**",
+        "Flux de travail type \"Commit\" : L'utilisateur définit une ligne de base (Baseline), effectue ses modifications, puis marque la version comme publiée pour réinitialiser le suivi.",
+        "==Export Markdown prêt à l'emploi : Les notes de version sont formatées pour être directement copiées-collées dans Slack, Jira, Notion ou GitHub.==",
+        "**Sécurité et simplicité \"Zero-Config\" : Toutes les données sont stockées localement dans le fichier Figma, sans nécessiter de compte externe ou de clé API.**",
+        "==Démocratisation par l'IA : L'auteur souligne que l'usage de LLMs et du \"vibe coding\" a rendu possible la création rapide de cet outil sur mesure pour son propre workflow.==",
+        "==Optimisation du handover : En éliminant le suivi manuel des micro-ajustements, l'outil réduit drastiquement les risques d'incohérence lors de l'implémentation technique.=="
+      ],
+      "tags": [
+        "figma",
+        "tokens",
+        "design-system",
+        "gouvernance",
+        "veille",
+        "design-to-code"
+      ],
+      "notes": "",
+      "createdAt": 1774725081515
+    },
+    {
       "id": "1774724850933",
       "url": "https://www.linkedin.com/posts/jon-prepeluh-03b6b9176_designsystems-ai-figma-ugcPost-7436775739838062593-fXRw?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
       "title": "Figma vers Storybook : automatisation totale du design-to-code.",
