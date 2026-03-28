@@ -1,6 +1,35 @@
 {
   "resources": [
     {
+      "id": "1774724169927",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7443045763942633472/?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
+      "title": "Orchestration multi-agents pour composants de Design System complexes",
+      "summary": "Intuit démontre comment une équipe de 9 agents IA peut produire des composants React de haute fidélité (accessibilité, tests, motion) en 3 jours au lieu de 3 semaines. Cette méthode privilégie l'audit architectural et l'extraction de l'intention du design avant toute génération de code.",
+      "tldr": "Intuit démontre comment une équipe de 9 agents IA peut produire des composants React de haute fidélité (accessibilité, tests, motion) en 3 jours au lieu de 3 semaines. Cette méthode privilégie l'audit architectural et l'extraction de l'intention du design avant toute génération de code.",
+      "insights": [
+        "Productivité massive : **Un composant Menu complexe (WAI-ARIA, responsive, tests) a été réalisé en 3 jours, là où un développement manuel aurait nécessité plus de 3 semaines.**",
+        "Architecture \"No-Code\" préalable : La phase la plus précieuse est celle où les agents débattent de l'architecture et auditent les dépendances sans écrire la moindre ligne de code.",
+        "Risque de réinvention : Sans garde-fous, l'IA peut coder manuellement des fonctionnalités complexes (ex: navigation clavier) déjà couvertes par des bibliothèques existantes comme floating-ui.",
+        "Extraction de l'intention réelle : Les agents analysent ce que le fichier Figma dit (et ne dit pas) pour transformer les éléments visuels en données exploitables par la machine.",
+        "==Arbitrage humain indispensable : Les décisions sur le mouvement (motion), l'expérience fine du lecteur d'écran et la priorisation des versions (v1 vs v1.1) restent du ressort de l'humain.==",
+        "==Qualité non-fonctionnelle : Atteindre les standards de tokens, de theming et de sémantique ARIA nécessite une structure de données propre que l'IA ne peut pas simplement \"deviner\".==",
+        "Infrastructures d'agents (MCP) : **Le succès repose sur des \"skills\" et serveurs MCP permettant aux IA d'accéder directement aux connaissances du système de design.**",
+        "Partenariat de pensée : L'objectif est de transformer des machines à probabilités en véritables partenaires de réflexion capables de poser des questions explicites aux humains."
+      ],
+      "tags": [
+        "design-system",
+        "ia-generation",
+        "accessibilite",
+        "design-to-code",
+        "experience-machine",
+        "gouvernance",
+        "storybook",
+        "figma"
+      ],
+      "notes": "",
+      "createdAt": 1774724169929
+    },
+    {
       "id": "1774723876703",
       "url": "https://www.linkedin.com/posts/activity-7442895153343676416-vTYX/?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
       "title": "Workflow Ornikar : Figma, Claude et codebase réelle",
