@@ -1,6 +1,32 @@
 {
   "resources": [
     {
+      "id": "1774724401436",
+      "url": "https://learn.thedesignsystem.guide/p/how-to-turn-metrics-into-actionable",
+      "title": "Transformer les métriques de Design System en actions",
+      "summary": "Cette ressource explique comment passer des indicateurs de vanité à des mesures exploitables pour piloter un Design System. Elle permet de prouver la valeur réelle du système aux parties prenantes et d'identifier les domaines prioritaires d'amélioration.",
+      "tldr": "Cette ressource explique comment passer des indicateurs de vanité à des mesures exploitables pour piloter un Design System. Elle permet de prouver la valeur réelle du système aux parties prenantes et d'identifier les domaines prioritaires d'amélioration.",
+      "insights": [
+        "Évitez les \"vanity metrics\" : Ne collectez pas de données uniquement pour embellir vos tableaux de bord ; **si une métrique n'est pas actionnable, elle est inutile**.",
+        "**__Définissez des objectifs clairs__** : L'équipe doit s'accorder sur un but primaire (comme l'adoption) avant de choisir ses indicateurs pour garantir l'obtention de ressources.",
+        "Mesurez l'efficacité opérationnelle : Suivez la réduction du temps passé en revues de design et l'accélération de la création de prototypes après l'implémentation du système.",
+        "Analysez l'adoption par équipe : Calculez le pourcentage de produits utilisant le Design System et comparez-le par département pour identifier les freins.",
+        "==Évaluez la collaboration interne : Mesurez la diminution du nombre de réunions d'alignement et de questions de support grâce à une documentation claire.==",
+        "Combinez quantitatif et qualitatif : Les chiffres seuls ne racontent pas toute l'histoire ; utilisez des sondages de satisfaction pour comprendre le ressenti des équipes.",
+        "==Suivez la dette technique : Documentez la réduction de la dette liée aux composants UI pour démontrer l'impact positif sur la qualité du code.==",
+        "Réagissez rapidement aux données : Les métriques sont des outils de pilotage qui doivent mener à des ajustements immédiats des workflows."
+      ],
+      "tags": [
+        "design-system",
+        "gouvernance",
+        "veille",
+        "audit-conformite",
+        "custom-roi-impact-mnaj7d7r"
+      ],
+      "notes": "",
+      "createdAt": 1774724401438
+    },
+    {
       "id": "1774724169927",
       "url": "https://www.linkedin.com/feed/update/urn:li:activity:7443045763942633472/?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
       "title": "Orchestration multi-agents pour composants de Design System complexes",
