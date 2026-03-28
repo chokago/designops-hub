@@ -1,2 +1,0 @@
-# designops-hub
-Veille DesignOps
