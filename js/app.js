@@ -88,7 +88,8 @@ let cfg = {
 // TAGS — liste complète (défauts + custom)
 // ════════════════════════════════════════════════════════════
 function allTags() {
-  return [...DEFAULT_TAGS, ...customTags];
+  return [...DEFAULT_TAGS, ...customTags]
+    .sort((a, b) => a.label.localeCompare(b.label, 'fr', { sensitivity: 'base' }));
 }
 
 function tagById(id) {
@@ -248,7 +249,6 @@ async function pushToGitHub() {
 function updateUI() {
   render();
   renderTagFilters();
-  renderTagSelector();
   updateAddPanelMode();
 }
 
@@ -638,8 +638,8 @@ async function addFromUrl() {
     toast('Ressource ajoutée et sauvegardée sur GitHub');
   } catch(e) {
     const msg = e.message || 'Erreur inconnue';
-    showStatus(msg, 'err');
-    toast(msg, 'err');
+    showStatus(msg,'err');
+    toast(msg,'err');
   }
   setLoading('btn-url',false);
 }
@@ -657,8 +657,8 @@ async function addFromText() {
     toast('Ressource ajoutée et sauvegardée');
   } catch(e) {
     const msg = e.message || 'Erreur inconnue';
-    showStatus(msg, 'err');
-    toast(msg, 'err');
+    showStatus(msg,'err');
+    toast(msg,'err');
   }
   setLoading('btn-text',false);
 }
@@ -728,7 +728,8 @@ async function submitManual() {
   const insights = rawIns ? rawIns.split('\n').map(s=>s.trim()).filter(Boolean) : [];
 
   try {
-    await createResource({ url, title, summary, tldr: summary, insights, suggestedTags: [] });
+    await createResource({ url, title, summary, tldr: summary, insights, suggestedTags: [] }, activeTags);
+    activeTags = [];
     closeOverlay('manual-overlay');
     toast('Ressource ajoutée ✓');
     document.getElementById('url-input').value = '';
@@ -741,7 +742,7 @@ async function submitManual() {
 // ════════════════════════════════════════════════════════════
 // CREATE RESOURCE (commun IA + manuel)
 // ════════════════════════════════════════════════════════════
-async function createResource(data) {
+async function createResource(data, manualTags = []) {
   const resource = {
     id:        Date.now().toString(),
     url:       data.url || '',
@@ -749,13 +750,12 @@ async function createResource(data) {
     summary:   data.summary || '',
     tldr:      data.tldr || data.summary || '',
     insights:  data.insights || [],
-    tags:      mergeTags(data.suggestedTags||[], activeTags),
+    tags:      mergeTags(data.suggestedTags || [], manualTags),
     notes:     '',
     createdAt: Date.now(),
   };
   resources.unshift(resource);
   await pushToGitHub();
-  activeTags = [];
   updateUI();
   return resource;
 }
@@ -1367,7 +1367,6 @@ document.addEventListener('keydown', e => {
 // BOOT
 // ════════════════════════════════════════════════════════════
 loadConfig();
-renderTagSelector();
 renderTagFilters();
 render();
 updateAddPanelMode();

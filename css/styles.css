@@ -259,7 +259,7 @@ aside {
   background: var(--surface); outline: none;
   transition: border .15s;
 }
-.settings-row input:focus { border-color: var(--accent); }
+.settings-row input:focus { border-color: var(--blue); }
 .settings-row input[type="password"] { letter-spacing: .05em; }
 
 .settings-divider { height: 1px; background: var(--border); margin: 10px 0; }
@@ -398,7 +398,7 @@ select {
 input[type="url"]:focus,
 input[type="text"]:focus,
 textarea:focus,
-select:focus { border-color: var(--accent); background: var(--surface); }
+select:focus { border-color: var(--blue); background: var(--surface); }
 
 textarea::placeholder, input::placeholder { color: var(--text3); }
 
@@ -486,7 +486,7 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
   font-size: 13px; border: 1px solid var(--border); border-radius: var(--r);
   background: var(--surface); outline: none; transition: border .15s;
 }
-.search-input:focus { border-color: var(--accent); }
+.search-input:focus { border-color: var(--blue); }
 
 .sort-sel {
   padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--r);
@@ -644,7 +644,7 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
   resize: vertical; min-height: 80px; outline: none;
   background: var(--bg); transition: border .15s;
 }
-.notes-area:focus { border-color: var(--accent); background: var(--surface); }
+.notes-area:focus { border-color: var(--blue); background: var(--surface); }
 
 .modal-foot {
   padding: 14px 22px; border-top: 1px solid var(--border);
@@ -828,7 +828,7 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
 }
 #manual-overlay .settings-row input:focus,
 #manual-overlay .settings-row textarea:focus {
-  border-color: var(--accent); background: var(--surface);
+  border-color: var(--blue); background: var(--surface);
 }
 #manual-overlay .settings-row label {
   display: block; font-size: 11px; color: var(--text3); margin-bottom: 4px;
@@ -1084,7 +1084,7 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
   outline: none;
   transition: border .15s;
 }
-.tagmgr-edit-fields input[type="text"]:focus { border-color: var(--accent); background: var(--surface); }
+.tagmgr-edit-fields input[type="text"]:focus { border-color: var(--blue); background: var(--surface); }
 
 /* Textarea description — pleine largeur */
 .tagmgr-edit-row textarea {
@@ -1102,7 +1102,7 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
   outline: none;
   transition: border .15s;
 }
-.tagmgr-edit-row textarea:focus { border-color: var(--accent); background: var(--surface); }
+.tagmgr-edit-row textarea:focus { border-color: var(--blue); background: var(--surface); }
 
 /* Label description */
 .tagmgr-edit-row .edit-desc-label {
