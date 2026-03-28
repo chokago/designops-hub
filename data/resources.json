@@ -1,6 +1,33 @@
 {
   "resources": [
     {
+      "id": "1774722688109",
+      "url": "https://southleft.com/insights/ai/figma-console-mcp-ai-powered-design-system-management/",
+      "title": "Figma Console MCP : l'IA au cœur du design",
+      "summary": "Cet outil open-source connecte les agents IA directement à l'API Figma pour automatiser l'inspection et la gestion des systèmes. Il transforme vos fichiers de design en données structurées exploitables pour supprimer les frictions entre conception et développement.",
+      "tldr": "Cet outil open-source connecte les agents IA directement à l'API Figma pour automatiser l'inspection et la gestion des systèmes. Il transforme vos fichiers de design en données structurées exploitables pour supprimer les frictions entre conception et développement.",
+      "insights": [
+        "Accès direct via MCP : L'outil utilise le Model Context Protocol pour permettre aux agents IA (comme Claude) de \"lire\" l'arborescence réelle des fichiers Figma sans copier-coller.",
+        "==Hygiène de structure imposée : Pour être efficace, l'outil exige des calques nommés sémantiquement, car une IA ne peut pas interpréter des éléments comme \"Frame 47\".==",
+        "Extraction intelligente de tokens : Les agents peuvent extraire instantanément des variables et des styles pour les convertir en formats consommables par le code (JSON, CSS).",
+        "**Validation de la parité : Il permet à l'IA de vérifier que les composants Figma correspondent exactement à leurs contreparties en code, réduisant ainsi les erreurs de handover.**",
+        "==Automatisation de l'audit : L'IA peut naviguer dans la hiérarchie des fichiers pour identifier les composants non conformes ou les variantes manquantes.==",
+        "Infrastructure \"Machine-Readable\" : L'outil concrétise le passage vers des systèmes de design pensés pour être interprétés par des machines, et non plus seulement par des humains.",
+        "Levier de productivité : En connectant l'IA à la source de vérité (Figma), les équipes débloquent des **gains de vitesse réels dans la création de documentation et de code**."
+      ],
+      "tags": [
+        "design-system",
+        "ia-generation",
+        "experience-machine",
+        "figma",
+        "design-to-code",
+        "veille",
+        "tokens"
+      ],
+      "notes": "",
+      "createdAt": 1774722688112
+    },
+    {
       "id": "1774722325587",
       "url": "https://www.designsystemspodcast.com/episodes/episode/7bc8c7c5/135-the-infrastructure-behind-digital-production-a-conversation-with-steve-dodier-lazaro",
       "title": "Le design system comme infrastructure et écosystème partagé",
