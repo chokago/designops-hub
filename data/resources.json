@@ -211,7 +211,8 @@
         "accessibilite",
         "ia-generation",
         "tokens",
-        "veille"
+        "veille",
+        "e-commerce"
       ],
       "notes": "",
       "createdAt": 1774712200968
@@ -242,13 +243,6 @@
     }
   ],
   "customTags": [
-    {
-      "id": "custom-e-commerce-mnahvuo0",
-      "label": "E-commerce",
-      "e": "🛒",
-      "color": "#5e30eb",
-      "desc": "Problématiques spécifiques à la vente en ligne : parcours d'achat, optimisation de la conversion, interfaces transactionnelles et checkouts."
-    },
     {
       "id": "custom-roi-impact-mnaj7d7r",
       "label": "ROI & Impact",
