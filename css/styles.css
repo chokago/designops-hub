@@ -1029,3 +1029,46 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
   background: var(--surface);
   color: var(--text);
 }
+
+/* ════════════════════════════════════════════════════════════
+   TAG MANAGER — descriptions toggle
+════════════════════════════════════════════════════════════ */
+.tagmgr-desc-row {
+  display: none;
+  padding: 6px 0 10px 0;
+  border-bottom: 1px solid var(--border);
+  margin-top: -1px;
+}
+.tagmgr-desc-row.visible { display: block; }
+
+.tagmgr-desc-text {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.6;
+  padding: 8px 10px;
+  background: var(--surface2);
+  border-radius: var(--r);
+  border-left: 2px solid var(--border2);
+}
+.tagmgr-desc-empty {
+  font-size: 11px;
+  color: var(--text3);
+  font-style: italic;
+  padding: 4px 10px;
+}
+
+/* Refonte zone d'édition — layout vertical */
+.tagmgr-edit-row {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+.tagmgr-edit-row.open { display: flex; }
+
+.tagmgr-edit-fields {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}

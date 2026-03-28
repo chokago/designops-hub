@@ -1,17 +1,68 @@
 // ════════════════════════════════════════════════════════════
 // DEFAULT TAGS — référentiel de base (peut être étendu)
+// Les IDs existants sont préservés pour ne pas casser les données
 // ════════════════════════════════════════════════════════════
 const DEFAULT_TAGS = [
-  { id:'design-system',  label:'Design System',   e:'🧱', color:'#5B21B6' },
-  { id:'accessibilite',  label:'Accessibilité',   e:'♿', color:'#237A38' },
-  { id:'design-to-code', label:'Design-to-Code',  e:'⚡', color:'#1A5FA8' },
-  { id:'gouvernance',    label:'Gouvernance',      e:'🏛️', color:'#D93D0A' },
-  { id:'ia-generation',  label:'IA & Génération', e:'🤖', color:'#A85309' },
-  { id:'tokens',         label:'Tokens',           e:'🎨', color:'#276749' },
-  { id:'figma',          label:'Figma & Plugins',  e:'✏️', color:'#9D174D' },
-  { id:'storybook',      label:'Storybook',        e:'📖', color:'#C05621' },
-  { id:'cursor',         label:'Cursor & AI IDE',  e:'💻', color:'#0369A1' },
-  { id:'veille',         label:'Veille',           e:'📡', color:'#65635C' },
+  {
+    id:'design-system', label:'Design System', e:'🧱', color:'#5B21B6',
+    desc:'Ressources traitant de la bibliothèque de composants, de la documentation centrale et de la "source unique de vérité" (Source of Truth).',
+  },
+  {
+    id:'accessibilite', label:'Accessibilité', e:'♿', color:'#237A38',
+    desc:'Focus technique sur la conformité aux normes (WCAG 2.2/3.0, RGAA). Inclut la navigation clavier, les lecteurs d\'écran et les contrastes.',
+  },
+  {
+    id:'inclusivite', label:'Inclusivité', e:'🤝', color:'#0891B2',
+    desc:'Dimension humaine et éthique du design. Couvre la diversité, l\'équité, la réduction des biais cognitifs et le design pour tous les genres/cultures.',
+  },
+  {
+    id:'audit-conformite', label:'Audit & conformité', e:'📋', color:'#B45309',
+    desc:'Aspects légaux et réglementaires (ex: European Accessibility Act 2025/2026), sécurité des données, et processus de contrôle qualité (QA).',
+  },
+  {
+    id:'experience-machine', label:'Expérience-Machine (MX)', e:'🤖', color:'#6D28D9',
+    desc:'Optimisation du design pour les agents IA. Concerne la structure des données (JSON, metadata) que l\'IA doit lire pour comprendre une interface.',
+  },
+  {
+    id:'spatial-ui', label:'Spatial UI', e:'🥽', color:'#0F766E',
+    desc:'Interfaces immersives et 3D (AR/VR/XR). Gestion de la profondeur, du regard (eye-tracking), et des environnements spatiaux (type Vision Pro).',
+  },
+  {
+    id:'design-to-code', label:'Design-to-Code', e:'⚡', color:'#1A5FA8',
+    desc:'Flux de travail liés au handover. Automatisation de la traduction du design en code (CSS-in-JS, composants React/Vue, export auto).',
+  },
+  {
+    id:'gouvernance', label:'Gouvernance', e:'🏛️', color:'#D93D0A',
+    desc:'Processus de décision, rôles des contributeurs, cycle de vie des composants, versioning et stratégies d\'adoption au sein de l\'entreprise.',
+  },
+  {
+    id:'ia-generation', label:'IA & Génération', e:'✨', color:'#A85309',
+    desc:'Utilisation de l\'IA générative pour créer des interfaces (Generative UI), des prompts système ou automatiser des tâches créatives répétitives.',
+  },
+  {
+    id:'tokens', label:'Tokens', e:'🎨', color:'#276749',
+    desc:'Gestion des design tokens (variables sémantiques). Architecture des styles pour le multi-mode (Light/Dark) et le multi-plateforme.',
+  },
+  {
+    id:'figma', label:'Figma & Plugins', e:'✏️', color:'#9D174D',
+    desc:'Tout ce qui concerne l\'outil de design principal, l\'utilisation des variables Figma, l\'organisation des fichiers et les extensions de workflow.',
+  },
+  {
+    id:'storybook', label:'Storybook', e:'📖', color:'#C05621',
+    desc:'Documentation technique des composants isolés, tests visuels en environnement sandbox et pont entre designers et développeurs Front-end.',
+  },
+  {
+    id:'cursor', label:'Cursor & AI IDE', e:'💻', color:'#0369A1',
+    desc:'Développement assisté par IA. Ressources sur l\'utilisation d\'éditeurs de code intelligents pour accélérer l\'intégration du design.',
+  },
+  {
+    id:'veille', label:'Veille', e:'📡', color:'#65635C',
+    desc:'Tendances prospectives, études de cas inspirantes, benchmarks concurrentiels et nouveaux usages émergents dans l\'industrie.',
+  },
+  {
+    id:'e-commerce', label:'E-commerce', e:'🛒', color:'#BE185D',
+    desc:'Problématiques spécifiques à la vente en ligne : parcours d\'achat, optimisation de la conversion, interfaces transactionnelles et checkouts.',
+  },
 ];
 
 const DATA_PATH = 'data/resources.json';
@@ -898,9 +949,21 @@ async function deleteRes(id) {
 // ════════════════════════════════════════════════════════════
 // TAG MANAGER
 // ════════════════════════════════════════════════════════════
+let showDescriptions = false;
+
 function openTagManager() {
+  showDescriptions = false;
+  const btn = document.getElementById('toggle-desc-btn');
+  if (btn) btn.textContent = '👁 Afficher les descriptions';
   renderTagManagerList();
   document.getElementById('tagmgr-overlay').classList.add('open');
+}
+
+function toggleDescriptions() {
+  showDescriptions = !showDescriptions;
+  const btn = document.getElementById('toggle-desc-btn');
+  if (btn) btn.textContent = showDescriptions ? '🙈 Masquer les descriptions' : '👁 Afficher les descriptions';
+  renderTagManagerList();
 }
 
 function renderTagManagerList() {
@@ -913,57 +976,89 @@ function renderTagManagerList() {
     const usageCount = resources.filter(r=>r.tags?.includes(t.id)).length;
     const isDefault  = DEFAULT_TAGS.some(d=>d.id===t.id);
     const canDelete  = !isDefault && usageCount===0;
+    const style      = tagStyle(t);
+    const safeDesc   = (t.desc||'').replace(/'/g,'&#39;').replace(/"/g,'&quot;');
 
-    const style = tagStyle(t);
-    const item  = document.createElement('div');
+    // Ligne principale
+    const item = document.createElement('div');
     item.className = 'tagmgr-item';
     item.dataset.id = t.id;
     item.innerHTML = `
       <span class="tagmgr-preview" style="${style}">${t.e} ${t.label}</span>
-      <span class="tagmgr-usage">${usageCount > 0 ? `${usageCount} ressource${usageCount>1?'s':''}` : isDefault?'défaut':''}</span>
+      <span class="tagmgr-usage">${usageCount > 0 ? `${usageCount} ressource${usageCount>1?'s':''}` : isDefault ? 'défaut' : ''}</span>
       <div class="tagmgr-actions">
-        <button class="btn sm" onclick="toggleTagEdit('${t.id}')">✏️ Renommer</button>
+        <button class="btn sm" onclick="toggleTagEdit('${t.id}')">✏️ Modifier</button>
         ${canDelete
           ? `<button class="btn sm danger" style="margin-left:0;" onclick="deleteTag('${t.id}')">🗑️</button>`
-          : `<button class="btn sm" disabled title="${usageCount>0?'Utilisé dans des ressources — retire-le d\'abord':'Tag système'}" style="opacity:.3;cursor:not-allowed;margin-left:0;">🗑️</button>`
+          : `<button class="btn sm" disabled title="${usageCount>0?'Retirez-le des ressources d\'abord':'Tag système'}" style="opacity:.3;cursor:not-allowed;margin-left:0;">🗑️</button>`
         }
       </div>`;
+
+    // Description (masquée par défaut, révélée par toggle)
+    const descRow = document.createElement('div');
+    descRow.className = 'tagmgr-desc-row' + (showDescriptions && t.desc ? ' visible' : '');
+    descRow.id = `desc-${t.id}`;
+    descRow.innerHTML = t.desc
+      ? `<p class="tagmgr-desc-text">${t.desc}</p>`
+      : `<p class="tagmgr-desc-empty">Aucune description.</p>`;
 
     // Zone d'édition inline
     const editRow = document.createElement('div');
     editRow.className = 'tagmgr-edit-row';
     editRow.id = `edit-${t.id}`;
     editRow.innerHTML = `
-      <input type="text" id="edit-emoji-${t.id}" value="${t.e}" maxlength="2" style="width:44px;text-align:center;font-size:18px;padding:5px 4px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);outline:none;"/>
-      <input type="text" id="edit-name-${t.id}" value="${t.label}" style="flex:1;min-width:100px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);font-size:13px;outline:none;"/>
-      <input type="color" id="edit-color-${t.id}" value="${t.color||'#6366F1'}" style="width:40px;height:32px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;padding:2px;background:var(--bg);"/>
-      <button class="btn primary sm" onclick="saveTagEdit('${t.id}')">Valider</button>
-      <button class="btn sm" onclick="toggleTagEdit('${t.id}')">Annuler</button>`;
+      <div class="tagmgr-edit-fields">
+        <input type="text" id="edit-emoji-${t.id}" value="${t.e}" maxlength="2"
+          style="width:44px;text-align:center;font-size:18px;padding:5px 4px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);outline:none;flex-shrink:0;"/>
+        <input type="text" id="edit-name-${t.id}" value="${t.label}"
+          style="flex:1;min-width:100px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);font-size:13px;outline:none;"/>
+        <input type="color" id="edit-color-${t.id}" value="${t.color||'#6366F1'}"
+          style="width:40px;height:32px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;padding:2px;background:var(--bg);flex-shrink:0;"/>
+      </div>
+      <div style="margin-top:6px;">
+        <label style="font-size:10px;color:var(--text3);display:block;margin-bottom:3px;">Description <span style="font-weight:400;">(optionnelle)</span></label>
+        <textarea id="edit-desc-${t.id}" rows="2"
+          placeholder="À quoi sert ce thème ? Quels types de ressources y classer ?"
+          style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);font-size:11px;font-family:inherit;resize:vertical;line-height:1.5;outline:none;">${t.desc||''}</textarea>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:6px;">
+        <button class="btn primary sm" onclick="saveTagEdit('${t.id}')">Valider</button>
+        <button class="btn sm" onclick="toggleTagEdit('${t.id}')">Annuler</button>
+      </div>`;
 
     c.appendChild(item);
+    c.appendChild(descRow);
     c.appendChild(editRow);
   });
 }
 
 function toggleTagEdit(id) {
+  // Fermer les autres zones d'édition ouvertes
+  document.querySelectorAll('.tagmgr-edit-row.open').forEach(r => {
+    if (r.id !== `edit-${id}`) r.classList.remove('open');
+  });
   const row = document.getElementById(`edit-${id}`);
   row.classList.toggle('open');
+  if (row.classList.contains('open')) {
+    setTimeout(() => row.querySelector(`#edit-name-${id}`)?.focus(), 50);
+  }
 }
 
 async function saveTagEdit(id) {
   const emoji = document.getElementById(`edit-emoji-${id}`).value.trim() || '🏷️';
   const name  = document.getElementById(`edit-name-${id}`).value.trim();
   const color = document.getElementById(`edit-color-${id}`).value;
+  const desc  = document.getElementById(`edit-desc-${id}`).value.trim();
+
   if (!name) { toast('Le nom est obligatoire','err'); return; }
 
+  // Mise à jour dans DEFAULT_TAGS ou customTags
   const defIdx = DEFAULT_TAGS.findIndex(t=>t.id===id);
-  if (defIdx>=0) {
-    DEFAULT_TAGS[defIdx].e = emoji;
-    DEFAULT_TAGS[defIdx].label = name;
-    DEFAULT_TAGS[defIdx].color = color;
+  if (defIdx >= 0) {
+    DEFAULT_TAGS[defIdx] = { ...DEFAULT_TAGS[defIdx], e:emoji, label:name, color, desc };
   } else {
     const cIdx = customTags.findIndex(t=>t.id===id);
-    if (cIdx>=0) { customTags[cIdx].e=emoji; customTags[cIdx].label=name; customTags[cIdx].color=color; }
+    if (cIdx >= 0) customTags[cIdx] = { ...customTags[cIdx], e:emoji, label:name, color, desc };
   }
 
   try {
@@ -981,7 +1076,10 @@ async function deleteTag(id) {
     await pushToGitHub();
     toast('Thème supprimé');
     renderTagManagerList();
-    if (activeFilter===id) { activeFilter='all'; document.querySelectorAll('.filter-btn')[0].classList.add('active'); }
+    if (activeFilter===id) {
+      activeFilter='all';
+      document.querySelectorAll('.filter-btn')[0]?.classList.add('active');
+    }
     updateUI();
   } catch(e) { toast('Erreur de sauvegarde','err'); }
 }
@@ -990,17 +1088,19 @@ async function addCustomTag() {
   const emoji = document.getElementById('new-tag-emoji').value.trim() || '🏷️';
   const name  = document.getElementById('new-tag-name').value.trim();
   const color = document.getElementById('new-tag-color').value;
+  const desc  = document.getElementById('new-tag-desc').value.trim();
   const errEl = document.getElementById('new-tag-error');
   errEl.classList.remove('visible');
 
   if (!name) { errEl.textContent='Le nom est obligatoire.'; errEl.classList.add('visible'); return; }
-
-  const id = 'custom-' + name.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').slice(0,30) + '-' + Date.now().toString(36);
   if (allTags().some(t=>t.label.toLowerCase()===name.toLowerCase())) {
-    errEl.textContent = 'Un thème avec ce nom existe déjà.'; errEl.classList.add('visible'); return;
+    errEl.textContent='Un thème avec ce nom existe déjà.'; errEl.classList.add('visible'); return;
   }
 
-  customTags.push({ id, label:name, e:emoji, color });
+  const id = 'custom-' + name.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').slice(0,30)
+    + '-' + Date.now().toString(36);
+
+  customTags.push({ id, label:name, e:emoji, color, desc });
 
   try {
     await pushToGitHub();
@@ -1008,9 +1108,14 @@ async function addCustomTag() {
     document.getElementById('new-tag-emoji').value = '';
     document.getElementById('new-tag-name').value  = '';
     document.getElementById('new-tag-color').value = '#6366F1';
+    document.getElementById('new-tag-desc').value  = '';
     renderTagManagerList();
     updateUI();
-  } catch(e) { customTags.pop(); errEl.textContent='Erreur de sauvegarde.'; errEl.classList.add('visible'); }
+  } catch(e) {
+    customTags.pop();
+    errEl.textContent='Erreur de sauvegarde.';
+    errEl.classList.add('visible');
+  }
 }
 
 // ════════════════════════════════════════════════════════════
