@@ -60,6 +60,12 @@
       "label": "ROI & Impact",
       "e": "🎯",
       "color": "#e32400"
+    },
+    {
+      "id": "custom-inclusivit--mnaj8xer",
+      "label": "Inclusivité",
+      "e": "🧠",
+      "color": "#4f7a28"
     }
   ]
 }
