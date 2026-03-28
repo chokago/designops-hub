@@ -105,7 +105,8 @@
       "id": "custom-audit-conformit--mnaj9yh5",
       "label": "Audit & Conformité",
       "e": "⚖️",
-      "color": "#444444"
+      "color": "#444444",
+      "desc": "Aspects légaux et réglementaires (ex: European Accessibility Act 2025/2026), RGAA / WCAG, sécurité des données, et processus de contrôle qualité (QA)."
     },
     {
       "id": "custom-exp-rience-machine-mx--mnajaphb",
