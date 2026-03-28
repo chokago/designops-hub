@@ -258,13 +258,6 @@
       "desc": "Dimension humaine et éthique du design. Couvre la diversité, l'équité, la réduction des biais cognitifs et le design pour tous les genres/cultures."
     },
     {
-      "id": "custom-exp-rience-machine-mx--mnajaphb",
-      "label": "Expérience-Machine (MX)",
-      "e": "🤖",
-      "color": "#6366f1",
-      "desc": "Optimisation du design pour les agents IA. Concerne la structure des données (JSON, metadata) que l'IA doit lire pour comprendre une interface."
-    },
-    {
       "id": "custom-spatial-ui-mnajcp2x",
       "label": "Spatial UI",
       "e": "🛰",
