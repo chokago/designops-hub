@@ -288,7 +288,31 @@
       </div>
       <div class="settings-row">
         <label>Insights clés <span style="color:var(--text3);font-weight:400;">(optionnel — 1 par ligne)</span></label>
-        <textarea class="paste-area" id="man-insights" style="min-height:90px;margin-bottom:0;" placeholder="Point clé 1&#10;Point clé 2&#10;Point clé 3"></textarea>
+
+        <!-- Onglets Éditer / Aperçu -->
+        <div class="editor-tabs" style="margin-bottom:8px;">
+          <button class="editor-tab active" id="man-tab-edit" onclick="switchManualTab('edit')">✏️ Éditer</button>
+          <button class="editor-tab" id="man-tab-preview" onclick="switchManualTab('preview')">👁 Aperçu</button>
+          <span class="editor-tab-hint">**gras** &nbsp;_italique_ &nbsp;__souligné__ &nbsp;==surligné==</span>
+        </div>
+
+        <!-- Panneau Éditer -->
+        <div id="man-editor-pane-edit">
+          <div class="md-toolbar">
+            <button class="md-btn" onclick="mdWrapManual('**','**')" title="Gras"><b>B</b></button>
+            <button class="md-btn" onclick="mdWrapManual('_','_')" title="Italique"><i>I</i></button>
+            <button class="md-btn" onclick="mdWrapManual('__','__')" title="Souligné"><u>U</u></button>
+            <button class="md-btn" onclick="mdWrapManual('==','==')" title="Surligner">🖊</button>
+            <button class="md-btn" onclick="mdWrapManual('`','`')" title="Code">{ }</button>
+          </div>
+          <textarea class="paste-area edit-insights-area" id="man-insights"
+            placeholder="Un insight par ligne...&#10;Utilisez **gras**, _italique_, ==surlignage=="></textarea>
+        </div>
+
+        <!-- Panneau Aperçu -->
+        <div id="man-editor-pane-preview" style="display:none;">
+          <div class="editor-preview-box" id="man-preview-content"></div>
+        </div>
       </div>
       <div style="margin-top:14px;">
         <div class="m-label">Tags <span style="color:var(--accent)">*</span> <span style="color:var(--text3);font-weight:400;">— au moins 1</span></div>

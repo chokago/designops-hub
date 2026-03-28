@@ -646,6 +646,8 @@ function openManualModal() {
   document.getElementById('man-insights').value= '';
   document.getElementById('man-error').classList.remove('visible');
   document.getElementById('man-error').textContent = '';
+  // Réinitialiser l'onglet éditeur
+  switchManualTab('edit');
   activeTags = [];
   renderTagSelector('man-tag-selector');
   document.getElementById('manual-overlay').classList.add('open');
@@ -958,8 +960,46 @@ function switchEditorTab(tab) {
 }
 
 // ════════════════════════════════════════════════════════════
-// TOOLBAR MARKDOWN
+// TOGGLE ÉDITER / APERÇU — modale manuelle
 // ════════════════════════════════════════════════════════════
+function switchManualTab(tab) {
+  const editPane    = document.getElementById('man-editor-pane-edit');
+  const previewPane = document.getElementById('man-editor-pane-preview');
+  const tabEdit     = document.getElementById('man-tab-edit');
+  const tabPreview  = document.getElementById('man-tab-preview');
+  if (!editPane) return;
+
+  if (tab === 'preview') {
+    const raw   = document.getElementById('man-insights').value;
+    const lines = raw.split('\n').map(s=>s.trim()).filter(Boolean);
+    document.getElementById('man-preview-content').innerHTML = lines.length
+      ? lines.map((ins,i) =>
+          `<div class="insight"><div class="insight-n">${i+1}</div><div>${renderMd(ins)}</div></div>`
+        ).join('')
+      : `<div class="insight"><span style="color:var(--text3)">Aucun insight à prévisualiser.</span></div>`;
+    editPane.style.display    = 'none';
+    previewPane.style.display = '';
+    tabEdit.classList.remove('active');
+    tabPreview.classList.add('active');
+  } else {
+    editPane.style.display    = '';
+    previewPane.style.display = 'none';
+    tabEdit.classList.add('active');
+    tabPreview.classList.remove('active');
+    document.getElementById('man-insights').focus();
+  }
+}
+
+function mdWrapManual(before, after) {
+  const ta  = document.getElementById('man-insights');
+  const s   = ta.selectionStart;
+  const e   = ta.selectionEnd;
+  const sel = ta.value.slice(s, e) || 'texte';
+  ta.value  = ta.value.slice(0,s) + before + sel + after + ta.value.slice(e);
+  ta.selectionStart = s + before.length;
+  ta.selectionEnd   = s + before.length + sel.length;
+  ta.focus();
+}
 function mdWrap(before, after) {
   const ta  = document.getElementById('m-insights-edit');
   const s   = ta.selectionStart;
