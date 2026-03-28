@@ -1,6 +1,33 @@
 {
   "resources": [
     {
+      "id": "1774723876703",
+      "url": "https://www.linkedin.com/posts/activity-7442895153343676416-vTYX/?utm_source=share&utm_medium=member_desktop&rcm=ACoAACG44lEBVNRBdJozqEC2ab_JhH4k9ADwCSg",
+      "title": "Workflow Ornikar : Figma, Claude et codebase réelle",
+      "summary": "Ornikar utilise ClaudeCode pour créer un environnement de prototypage ultra-réaliste qui puise directement dans leur Design System et leur codebase. Cette approche permet d'accélérer les tests utilisateurs et de donner plus d'autonomie aux équipes produit pour les itérations mineures.",
+      "tldr": "Ornikar utilise ClaudeCode pour créer un environnement de prototypage ultra-réaliste qui puise directement dans leur Design System et leur codebase. Cette approche permet d'accélérer les tests utilisateurs et de donner plus d'autonomie aux équipes produit pour les itérations mineures.",
+      "insights": [
+        "Le contexte est roi : L'IA est d'autant plus performante qu'elle dispose d'un contexte riche, incluant les composants du Design System et le code réel pour éviter de \"réinventer la roue\".",
+        "Workflow bidirectionnel : La mise en place d'un cycle Figma → Claude → Figma assure une fluidité totale entre la conception stratégique et le prototypage fonctionnel.",
+        "==Réalisme des tests : Utiliser Claude Code permet d'obtenir un rendu suffisamment fidèle à la production pour collecter des retours utilisateurs plus fiables dès la phase d'exploration.==",
+        "Optimisation des rôles : **Les designers conservent la main sur la création dans Figma, tandis que l'IA gère l'accélération du delivery et le traitement des cas limites (edge cases).**",
+        "Démocratisation du design : Le produit gagne en autonomie sur des tâches simples comme les modifications de wording ou les ajustements de parcours existants.",
+        "Intégration technologique : Le recours au protocole MCP (Model Context Protocol) est essentiel pour permettre à Claude de comprendre et réutiliser efficacement les composants Figma.",
+        "==Parité design-code : Relier la codebase réelle au projet de prototypage renforce la \"source de vérité\" indispensable à une IA efficace.=="
+      ],
+      "tags": [
+        "design-system",
+        "ia-generation",
+        "figma",
+        "design-to-code",
+        "experience-machine",
+        "gouvernance",
+        "veille"
+      ],
+      "notes": "",
+      "createdAt": 1774723876705
+    },
+    {
       "id": "1774723083888",
       "url": "https://storybook.js.org/blog/storybook-mcp-for-react/",
       "title": "Storybook MCP : l'IA dopée aux composants React",
