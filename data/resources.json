@@ -249,13 +249,6 @@
       "e": "🎯",
       "color": "#e32400",
       "desc": "Preuves tangibles de la valeur du design et de l'opérationnel. Inclut les métriques de gain de temps, la réduction de la dette technique, les économies d'échelle et les indicateurs de performance (KPI)."
-    },
-    {
-      "id": "custom-inclusivit--mnaj8xer",
-      "label": "Inclusivité",
-      "e": "🧠",
-      "color": "#ed719e",
-      "desc": "Dimension humaine et éthique du design. Couvre la diversité, l'équité, la réduction des biais cognitifs et le design pour tous les genres/cultures."
     }
   ]
 }
