@@ -60,28 +60,26 @@ header {
   height: var(--header-h);
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  /* Grid 3 col : gauche (burger) | centre (logo) | droite (actions)
-     Le logo est toujours optiquement centré dans le header */
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 20px;
-  gap: 8px;
+  gap: 12px;
 }
 
-/* Colonne gauche */
+/* Slot gauche — contient le burger (ou rien en desktop) */
 .header-left {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  flex-shrink: 0;
 }
 
-/* Colonne centre — logo */
+/* Logo — aligné à gauche en desktop, naturellement */
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: center;
+  flex: 1; /* prend l'espace disponible entre .header-left et .header-right */
 }
 
 .logo-mark {
@@ -97,12 +95,12 @@ header {
 .logo-text { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
 .logo-sub  { font-size: 11px; color: var(--text3); font-weight: 400; line-height: 1; margin-top: 1px; }
 
-/* Colonne droite — actions */
+/* Actions droite */
 .header-right {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .sync-indicator {
@@ -235,6 +233,21 @@ aside {
 }
 .sidebar-overlay.open { display: block; }
 
+/* Bouton fermer la sidebar — caché en desktop, visible en drawer */
+.sidebar-close-row { padding-bottom: 4px; }
+
+.sidebar-close-btn {
+  display: none; /* visible uniquement via le media query */
+  align-items: center; gap: 6px;
+  padding: 6px 8px;
+  border-radius: var(--r);
+  border: none; background: none; cursor: pointer;
+  font-family: var(--font); font-size: 13px; color: var(--text3);
+  transition: background .12s, color .12s;
+  width: 100%;
+}
+.sidebar-close-btn:hover { background: var(--surface2); color: var(--text); }
+
 /* ════════════════════════════════════════════════════════════
    MAIN — centré dans l'espace disponible
 ════════════════════════════════════════════════════════════ */
@@ -281,7 +294,13 @@ main {
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 
-.row { display: flex; gap: 8px; margin-bottom: 10px; }
+.row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  /* Empêche le débordement sur petits écrans */
+  min-width: 0;
+}
 
 /* Inputs */
 input[type="url"],
@@ -300,7 +319,16 @@ select:focus { border-color: var(--accent); background: var(--surface); }
 
 textarea::placeholder, input::placeholder { color: var(--text3); }
 
-.url-input { flex: 1; padding: 9px 12px; font-family: var(--mono); font-size: 12px; }
+.url-input {
+  flex: 1;
+  min-width: 0; /* crucial : empêche l'input de repousser le bouton hors du conteneur */
+  padding: 9px 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+/* Le bouton Analyser ne rétrécit jamais */
+.row .btn { flex-shrink: 0; }
 
 .paste-area {
   width: 100%; padding: 10px 12px;
@@ -549,65 +577,55 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
 }
 
 /* ════════════════════════════════════════════════════════════
-   RESPONSIVE — Tablet (≤ 900px)
+   RESPONSIVE — Tablette paysage / petits laptops (≤ 768px)
+   → sidebar en drawer, burger visible
 ════════════════════════════════════════════════════════════ */
-@media (max-width: 900px) {
-  /* Sidebar devient un drawer full-height au-dessus de tout */
+@media (max-width: 768px) {
+  /* Sidebar → drawer full-height */
   aside {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     height: 100vh;
     z-index: 102;
     transform: translateX(-100%);
     box-shadow: var(--sh2);
   }
-
-  aside.open {
-    transform: translateX(0);
-  }
+  aside.open { transform: translateX(0); }
 
   /* Burger visible */
   .burger-btn { display: flex; }
 
-  /* Main prend toute la largeur */
+  /* Bouton fermer visible dans le drawer */
+  .sidebar-close-btn { display: flex; }
+
   .main-wrapper { padding: 16px; }
 }
 
 /* ════════════════════════════════════════════════════════════
-   RESPONSIVE — Mobile (≤ 560px)
+   RESPONSIVE — Mobile portrait (≤ 480px)
+   → header compact, logo réduit à la pastille
 ════════════════════════════════════════════════════════════ */
-@media (max-width: 560px) {
-  /* Header : logo réduit, empiler si besoin */
-  header { padding: 0 12px; gap: 8px; }
+@media (max-width: 480px) {
+  header { padding: 0 12px; gap: 6px; }
 
-  /* Cacher texte logo, garder juste la pastille */
+  /* Logo : on garde la pastille DO, on cache le texte */
   .logo-text,
-  .logo-sub  { display: none; }
+  .logo-sub { display: none; }
 
-  /* Cacher le sync label, garder juste le dot */
+  /* Sync : on garde le dot, on cache le label texte */
   .sync-indicator { padding: 4px 8px; }
   #sync-label     { display: none; }
 
-  /* Badge ressources + export restent visibles */
-  #total-badge { font-size: 11px; }
+  /* Badge + export restent visibles */
+  #total-badge { font-size: 10px; }
+  .btn.sm      { padding: 6px 10px; font-size: 11px; }
 
-  /* Bouton export en mode compact */
-  .btn.sm { padding: 6px 10px; font-size: 11px; }
-
-  /* Main padding réduit */
   .main-wrapper { padding: 12px; }
 
-  /* Modal plein écran sur mobile */
+  /* Modal en bottom sheet */
   .overlay { padding: 0; align-items: flex-end; }
   .modal   { max-height: 92vh; border-radius: var(--rx) var(--rx) 0 0; }
-
-  /* Modal footer scroll horizontal si trop de boutons */
   .modal-foot { overflow-x: auto; flex-wrap: nowrap; }
 
-  /* Cards */
   .card { padding: 14px; }
-
-  /* URL input */
-  .url-input { font-size: 12px; }
 }
