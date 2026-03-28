@@ -1,6 +1,6 @@
 # DesignOps Knowledge Hub — Cdiscount
 
-Base de veille DesignOps alimentée par IA (Claude), hébergée sur GitHub Pages, persistée dans un fichier JSON versionné sur GitHub.
+Hub de veille Design Ops alimentée par IA (Claude), hébergée sur GitHub Pages, persistée dans un fichier JSON versionné sur GitHub.
 
 ---
 
@@ -157,7 +157,7 @@ Syntaxe Markdown supportée dans les insights :
 
 Sidebar → **+ Gérer** : créer, renommer, recolorer, décrire ou supprimer des thèmes. Un thème utilisé dans au moins une ressource ne peut pas être supprimé — retirer d'abord le tag des ressources concernées via la fiche détail (bouton × sur chaque pill).
 
-15 thèmes sont prédéfinis dans le code. Les thèmes custom sont persistés dans `customTags` du JSON GitHub.
+Une dizaine de thèmes sont prédéfinis dans le code. Les thèmes custom sont persistés dans `customTags` du JSON GitHub.
 
 ---
 
@@ -174,5 +174,5 @@ Ou : **📤 Exporter** → copier le Markdown complet de toute la base → colle
 ## Sécurité
 
 - Le token GitHub PAT et la clé API Claude sont stockés en **localStorage uniquement** — jamais dans le code ni dans le repo
-- Le repo peut rester **privé** (GitHub Pages fonctionne gratuitement en repo public)
+- Le repo est **public** afin d'utiliser GitHub Pages gratuitement
 - Si un token expire, en générer un nouveau et le reconfigurer dans la sidebar
