@@ -8,21 +8,13 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
-     HEADER
-════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════ HEADER -->
 <header>
-
-  <!-- Colonne gauche : burger (visible ≤ 900px) -->
   <div class="header-left">
     <button class="burger-btn" onclick="toggleSidebar()" aria-label="Ouvrir le menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </div>
-
-  <!-- Colonne centre : logo -->
   <div class="logo">
     <div class="logo-mark">DO</div>
     <div>
@@ -30,125 +22,105 @@
       <div class="logo-sub">Cdiscount · Knowledge Base</div>
     </div>
   </div>
-
-  <!-- Colonne droite : actions -->
   <div class="header-right">
-    <span id="total-badge" style="font-size:11px; color:var(--text3); font-family:var(--mono); white-space:nowrap;">0 ressources</span>
+    <span id="total-badge"></span>
     <button class="btn sm" onclick="openExport()">📤 Exporter</button>
   </div>
-
 </header>
 
-<!-- ═══════════════════════════════════════════════════════
-     LAYOUT
-════════════════════════════════════════════════════════ -->
 <div class="layout">
 
-  <!-- Overlay fond sidebar mobile -->
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-  <!-- ══════════════════════════════ SIDEBAR -->
+  <!-- ══════════════════════════════════ SIDEBAR -->
   <aside>
 
-    <!-- Bouton fermer — visible uniquement en mode drawer (≤ 768px) -->
     <div class="side-section sidebar-close-row">
-      <button class="sidebar-close-btn" onclick="closeSidebar()" aria-label="Fermer le menu">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 6 6 18M6 6l12 12"/>
-        </svg>
+      <button class="sidebar-close-btn" onclick="closeSidebar()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
         Fermer
       </button>
     </div>
 
     <div class="side-section">
       <div class="side-label">Filtres</div>
-      <button class="filter-btn active" onclick="setFilter('all', this); closeSidebar();">
+      <button class="filter-btn active" onclick="setFilter('all',this);closeSidebar();">
         📂 Toutes <span class="fc" id="ct-all">0</span>
       </button>
     </div>
 
     <div class="side-section">
-      <div class="side-label">Thèmes</div>
+      <div class="side-label-row">
+        <span class="side-label" style="margin-bottom:0">Thèmes</span>
+        <button class="side-label-action" onclick="openTagManager()">+ Gérer</button>
+      </div>
       <div id="tag-filters"></div>
     </div>
 
-    <div class="side-section" style="margin-top:auto; padding-top:12px; display:flex; flex-direction:column; gap:10px;">
+    <div class="side-section" style="margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:10px;">
 
-      <!-- Panel GitHub -->
       <div class="settings-panel">
         <div class="settings-panel-head">
           <h4>⚙️ GitHub</h4>
-          <div class="conn-badge" id="gh-badge">
-            <span class="conn-dot" id="gh-dot"></span>
-            <span id="gh-label">—</span>
-          </div>
+          <div class="conn-badge"><span class="conn-dot" id="gh-dot"></span><span id="gh-label">—</span></div>
         </div>
-        <div class="settings-row">
-          <label>Owner/Repo</label>
-          <input type="text" id="cfg-repo" placeholder="username/repo-name" />
-        </div>
-        <div class="settings-row">
-          <label>Personal Access Token</label>
-          <input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx" />
-        </div>
-        <div class="settings-row">
-          <label>Branche</label>
-          <input type="text" id="cfg-branch" placeholder="main" />
-        </div>
+        <div class="settings-row"><label>Owner/Repo</label><input type="text" id="cfg-repo" placeholder="username/repo-name"/></div>
+        <div class="settings-row"><label>Personal Access Token</label><input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx"/></div>
+        <div class="settings-row"><label>Branche</label><input type="text" id="cfg-branch" placeholder="main"/></div>
         <div class="settings-error" id="gh-error"></div>
         <button class="settings-save" id="gh-save-btn" onclick="saveGitHub()">Tester la connexion</button>
       </div>
 
-      <!-- Panel Claude API -->
       <div class="settings-panel">
         <div class="settings-panel-head">
           <h4>🤖 Claude API</h4>
-          <div class="conn-badge" id="claude-badge">
-            <span class="conn-dot" id="claude-dot"></span>
-            <span id="claude-label">—</span>
-          </div>
+          <div class="conn-badge"><span class="conn-dot" id="claude-dot"></span><span id="claude-label">—</span></div>
         </div>
-        <div class="settings-row">
-          <label>Anthropic API Key</label>
-          <input type="password" id="cfg-anthropic" placeholder="sk-ant-xxxxxxxxxxxx" />
-        </div>
-        <div style="font-size:10px; color:var(--text3); line-height:1.5; margin-bottom:8px;">
-          Stockée dans ton navigateur uniquement. Jamais dans le repo.
-          <a href="https://console.anthropic.com/settings/keys" target="_blank"
-             style="color:var(--accent); text-decoration:none;">Obtenir une clé →</a>
+        <div class="settings-row"><label>Anthropic API Key</label><input type="password" id="cfg-anthropic" placeholder="sk-ant-xxxxxxxxxxxx"/></div>
+        <div style="font-size:10px;color:var(--text3);line-height:1.5;margin-bottom:8px;">
+          Stockée dans ton navigateur. Jamais dans le repo.
+          <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--accent);text-decoration:none;">Obtenir une clé →</a>
         </div>
         <div class="settings-error" id="claude-error"></div>
         <button class="settings-save" id="claude-save-btn" onclick="saveClaude()">Tester la clé</button>
       </div>
 
     </div>
-
   </aside>
 
-  <!-- ══════════════════════════════ MAIN -->
+  <!-- ══════════════════════════════════ MAIN -->
   <div class="main-wrapper">
     <main>
+
+      <!-- Bannière no-API -->
+      <div class="no-api-banner" id="no-api-banner">
+        <div class="no-api-icon">ℹ️</div>
+        <div class="no-api-text">
+          <strong>Mode manuel actif</strong> — Aucune clé Claude API configurée.
+          Les ressources sont ajoutées manuellement : tu renseignes toi-même le titre, la description et les insights.
+          Configure ta clé dans la sidebar pour activer l'analyse IA automatique.
+        </div>
+      </div>
 
       <!-- ADD PANEL -->
       <div class="add-panel">
         <div class="add-panel-head">
           <span class="add-panel-title">➕ Ajouter une ressource</span>
-          <div class="tabs">
-            <button class="tab active" onclick="switchTab('url', this)">🔗 URL</button>
-            <button class="tab" onclick="switchTab('text', this)">📋 Texte</button>
+          <div class="tabs" id="add-tabs">
+            <button class="tab active" onclick="switchTab('url',this)">🔗 URL</button>
+            <button class="tab" onclick="switchTab('text',this)">📋 Texte</button>
           </div>
         </div>
 
         <div class="tab-pane active" id="pane-url">
           <div class="row">
-            <input type="url" class="url-input" id="url-input" placeholder="https://..." />
-            <button class="btn primary" id="btn-url" onclick="addFromUrl()">✨ Analyser</button>
+            <input type="url" class="url-input" id="url-input" placeholder="https://..."/>
+            <button class="btn primary" id="btn-url" onclick="handleAddUrl()">✨ Analyser</button>
           </div>
         </div>
 
         <div class="tab-pane" id="pane-text">
-          <textarea class="paste-area" id="text-input"
-            placeholder="Collez ici un extrait d'article, README, thread, doc... Claude extraira les insights."></textarea>
+          <textarea class="paste-area" id="text-input" placeholder="Collez ici un extrait d'article, README, thread... Claude extraira les insights."></textarea>
           <div class="row">
             <button class="btn primary" id="btn-text" onclick="addFromText()">✨ Analyser le texte</button>
           </div>
@@ -165,14 +137,11 @@
         </div>
       </div>
 
-      <!-- SEARCH + SORT -->
+      <!-- LIST -->
       <div class="search-wrap">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        <input class="search-input" id="search" placeholder="Rechercher dans les ressources..." oninput="render()" />
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="search-input" id="search" placeholder="Rechercher dans les ressources..." oninput="render()"/>
       </div>
-
       <div class="list-head">
         <span class="list-title" id="list-label">Toutes les ressources</span>
         <select class="sort-sel" onchange="render()">
@@ -181,18 +150,13 @@
           <option value="az">A → Z</option>
         </select>
       </div>
-
-      <!-- CARDS -->
       <div class="grid" id="grid"></div>
 
     </main>
   </div>
-
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     DETAIL MODAL
-════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════ DETAIL MODAL -->
 <div class="overlay" id="detail-overlay">
   <div class="modal">
     <div class="modal-head">
@@ -208,8 +172,10 @@
       <div class="tldr-block"><p id="m-tldr"></p></div>
       <div class="m-label">Insights clés</div>
       <div class="insights-list" id="m-insights"></div>
-      <div class="m-label" style="margin-top:16px;">Tags</div>
-      <div class="pills" id="m-tags" style="margin-bottom:16px;"></div>
+      <div class="m-label" style="margin-top:16px;">Tags
+        <span style="font-weight:400;color:var(--text3);font-size:10px;margin-left:6px;">— cliquer × pour retirer</span>
+      </div>
+      <div class="pills editable" id="m-tags" style="margin-bottom:16px;"></div>
       <div class="m-label">Notes personnelles</div>
       <textarea class="notes-area" id="m-notes" placeholder="Vos notes, réflexions..."></textarea>
     </div>
@@ -222,21 +188,85 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     EXPORT MODAL
-════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════ MANUAL ADD MODAL -->
+<div class="overlay" id="manual-overlay">
+  <div class="modal" style="max-width:580px;">
+    <div class="modal-head">
+      <div class="modal-head-text"><div class="modal-title-text">Ajouter une ressource</div></div>
+      <button class="modal-close" onclick="closeOverlay('manual-overlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="m-label">URL</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;">
+        <input type="url" id="man-url" class="url-input" style="flex:1;min-width:0;" placeholder="https://..." oninput="onManualUrlChange()"/>
+        <button class="btn sm" id="man-fetch-btn" onclick="fetchManualMeta()">Récupérer le titre</button>
+      </div>
+      <div class="settings-row">
+        <label>Titre <span style="color:var(--accent)">*</span></label>
+        <input type="text" id="man-title" placeholder="Titre de la ressource"/>
+      </div>
+      <div class="settings-row">
+        <label>Description courte <span style="color:var(--accent)">*</span></label>
+        <input type="text" id="man-summary" placeholder="En 1-2 phrases, de quoi s'agit-il ?"/>
+      </div>
+      <div class="settings-row">
+        <label>Insights clés <span style="color:var(--text3);font-weight:400;">(optionnel — 1 par ligne)</span></label>
+        <textarea class="paste-area" id="man-insights" style="min-height:90px;margin-bottom:0;" placeholder="Point clé 1&#10;Point clé 2&#10;Point clé 3"></textarea>
+      </div>
+      <div style="margin-top:14px;">
+        <div class="m-label">Tags <span style="color:var(--accent)">*</span> <span style="color:var(--text3);font-weight:400;">— au moins 1</span></div>
+        <div class="tags-row" id="man-tag-selector"></div>
+      </div>
+      <div class="settings-error" id="man-error" style="margin-top:10px;"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn primary sm" onclick="submitManual()">+ Ajouter la ressource</button>
+      <button class="btn sm" onclick="closeOverlay('manual-overlay')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ TAG MANAGER MODAL -->
+<div class="overlay" id="tagmgr-overlay">
+  <div class="modal" style="max-width:520px;">
+    <div class="modal-head">
+      <div class="modal-head-text"><div class="modal-title-text">Gérer les thèmes</div></div>
+      <button class="modal-close" onclick="closeOverlay('tagmgr-overlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="tagmgr-list"></div>
+      <div style="border-top:1px solid var(--border);margin-top:16px;padding-top:16px;">
+        <div class="m-label">Nouveau thème</div>
+        <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;">
+          <div style="flex:0 0 52px;">
+            <label style="font-size:11px;color:var(--text3);display:block;margin-bottom:3px;">Emoji</label>
+            <input type="text" id="new-tag-emoji" maxlength="2" placeholder="🏷️" style="width:52px;text-align:center;font-size:18px;padding:6px 4px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);outline:none;"/>
+          </div>
+          <div style="flex:1;min-width:120px;">
+            <label style="font-size:11px;color:var(--text3);display:block;margin-bottom:3px;">Nom</label>
+            <input type="text" id="new-tag-name" placeholder="Nom du thème" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:var(--r);background:var(--bg);outline:none;font-size:13px;"/>
+          </div>
+          <div style="flex:0 0 44px;">
+            <label style="font-size:11px;color:var(--text3);display:block;margin-bottom:3px;">Couleur</label>
+            <input type="color" id="new-tag-color" value="#6366F1" style="width:44px;height:34px;border:1px solid var(--border);border-radius:var(--r);cursor:pointer;padding:2px;background:var(--bg);"/>
+          </div>
+          <button class="btn primary sm" onclick="addCustomTag()" style="flex-shrink:0;">+ Créer</button>
+        </div>
+        <div class="settings-error" id="new-tag-error" style="margin-top:8px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ EXPORT MODAL -->
 <div class="overlay" id="export-overlay">
   <div class="modal" style="max-width:600px;">
     <div class="modal-head">
-      <div class="modal-head-text">
-        <div class="modal-title-text">Exporter la base</div>
-      </div>
+      <div class="modal-head-text"><div class="modal-title-text">Exporter la base</div></div>
       <button class="modal-close" onclick="closeOverlay('export-overlay')">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:13px; color:var(--text2); margin-bottom:12px;">
-        Markdown compatible Notion, OneNote, Obsidian. Copiez tout et collez.
-      </p>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Markdown compatible Notion, OneNote, Obsidian.</p>
       <div class="export-box" id="export-box"></div>
     </div>
     <div class="modal-foot">
@@ -246,9 +276,7 @@
   </div>
 </div>
 
-<!-- Toast notifications -->
 <div id="toast-container" aria-live="polite"></div>
-
 <script src="js/app.js"></script>
 </body>
 </html>
