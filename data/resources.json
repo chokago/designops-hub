@@ -1,6 +1,34 @@
 {
   "resources": [
     {
+      "id": "1774725767952",
+      "url": "https://docs.google.com/document/d/15SBwcMJc5wnaPy8bC1UG5NXmRsACcCMW/edit?_hsenc=p2ANqtz-9A-Be1MtbLBweQ6RZCTJvKNraIE9Kvwj6G_bQ6CUXlo3QvQtCnOTFp_MbDyNUsc5tiD6TAyvbEjvU6zMWvvbXH7hKVbD5OBb69p18Z-oVl8Jr_OWw&_hsmi=25134692",
+      "title": "Scorecard de maturité IA pour Design Systems",
+      "summary": "Cet outil d'auto-évaluation diagnostique la capacité d'un système de design à supporter efficacement les flux de travail assistés par l'IA. Il identifie les lacunes structurelles critiques qui séparent les gains de vitesse réels de l'accumulation de dette technique.",
+      "tldr": "Cet outil d'auto-évaluation diagnostique la capacité d'un système de design à supporter efficacement les flux de travail assistés par l'IA. Il identifie les lacunes structurelles critiques qui séparent les gains de vitesse réels de l'accumulation de dette technique.",
+      "insights": [
+        "Tokens comme fondation : Une architecture de tokens sémantiques et hiérarchisés (primitives → aliases → composants) fournit le vocabulaire essentiel pour que l'IA comprenne et applique l'identité de marque.",
+        "==Fiabilité des API composants : Des propriétés nommées de façon cohérente et documentées pour être lisibles par une machine réduisent la complexité du \"prompt engineering\".==",
+        "**Impératif de parité : L'absence de synchronisation stricte entre Figma et le code induit des erreurs systématiques dans les sorties générées par l'IA.**",
+        "Lisibilité machine des fichiers : __**L'usage de noms de calques descriptifs et d'Auto Layout est crucial **__pour que les agents IA, comme Figma Console MCP, puissent naviguer et extraire des données.",
+        "Gouvernance anti-dérive : Un processus de contribution clair est indispensable pour valider les propositions de l'IA et éviter qu'elles ne corrompent l'intégrité du système.",
+        "Maturité par l'usage : La préparation réelle à l'IA se mesure par l'existence de workflows répétitifs (génération de tokens, doc, revues) plutôt que par de simples expérimentations isolées.",
+        "Documentation hybride : **Le contenu doit désormais être rédigé pour être à la fois compréhensible par les humains et exploitable par les algorithmes.**"
+      ],
+      "tags": [
+        "design-system",
+        "ia-generation",
+        "experience-machine",
+        "tokens",
+        "design-to-code",
+        "gouvernance",
+        "figma",
+        "veille"
+      ],
+      "notes": "",
+      "createdAt": 1774725767954
+    },
+    {
       "id": "1774725291701",
       "url": "https://www.devoteam.com/fr/expert-view/design-system-et-accessibilite/",
       "title": "Design System : levier systémique de l'accessibilité numérique",
