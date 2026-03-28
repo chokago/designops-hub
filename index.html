@@ -162,28 +162,78 @@
     <div class="modal-head">
       <div class="favicon" id="m-fav">📄</div>
       <div class="modal-head-text">
+        <!-- Mode lecture -->
         <div class="modal-title-text" id="m-title"></div>
+        <!-- Mode édition -->
+        <input type="text" class="m-title-input" id="m-title-input" placeholder="Titre de la ressource" style="display:none;"/>
         <div class="modal-domain" id="m-domain"></div>
       </div>
-      <button class="modal-close" onclick="closeOverlay('detail-overlay')">✕</button>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button class="btn sm" id="m-edit-btn" onclick="enterEditMode()">✏️ Modifier</button>
+        <button class="modal-close" onclick="closeOverlay('detail-overlay')">✕</button>
+      </div>
     </div>
+
     <div class="modal-body">
       <div class="m-label">TL;DR</div>
       <div class="tldr-block"><p id="m-tldr"></p></div>
-      <div class="m-label">Insights clés</div>
-      <div class="insights-list" id="m-insights"></div>
-      <div class="m-label" style="margin-top:16px;">Tags
-        <span style="font-weight:400;color:var(--text3);font-size:10px;margin-left:6px;">— cliquer × pour retirer</span>
+
+      <!-- INSIGHTS — mode lecture -->
+      <div id="insights-read-block">
+        <div class="m-label">Insights clés</div>
+        <div class="insights-list" id="m-insights"></div>
       </div>
-      <div class="pills editable" id="m-tags" style="margin-bottom:16px;"></div>
-      <div class="m-label">Notes personnelles</div>
+
+      <!-- INSIGHTS — mode édition -->
+      <div id="insights-edit-block" style="display:none;">
+        <div class="m-label">Insights clés
+          <span style="font-weight:400;color:var(--text3);font-size:10px;margin-left:6px;">— 1 par ligne · **gras** _italique_ ==surligné==</span>
+        </div>
+        <div class="md-toolbar">
+          <button class="md-btn" onclick="mdWrap('**','**')" title="Gras"><b>B</b></button>
+          <button class="md-btn" onclick="mdWrap('_','_')" title="Italique"><i>I</i></button>
+          <button class="md-btn" onclick="mdWrap('__','__')" title="Souligné"><u>U</u></button>
+          <button class="md-btn" onclick="mdWrap('==','==')" title="Surligner">🖊</button>
+        </div>
+        <textarea class="paste-area edit-insights-area" id="m-insights-edit"
+          placeholder="Un insight par ligne...&#10;Utilisez **gras**, _italique_, ==surlignage=="></textarea>
+      </div>
+
+      <!-- TAGS — section toujours visible -->
+      <div style="margin-top:16px;">
+        <div class="m-label-row">
+          <span class="m-label" style="margin-bottom:0;">Tags</span>
+          <button class="m-label-action" onclick="toggleQuickTagAdd()">+ Ajouter</button>
+        </div>
+        <div class="pills editable" id="m-tags" style="margin:8px 0 8px;"></div>
+
+        <!-- Quick tag add — masqué par défaut -->
+        <div class="quick-tag-add" id="quick-tag-add" style="display:none;">
+          <div class="tags-row" id="m-tag-selector" style="margin-bottom:6px;"></div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn primary sm" onclick="applyQuickTags()">Ajouter les tags sélectionnés</button>
+            <button class="btn sm" onclick="toggleQuickTagAdd()">Annuler</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-label" style="margin-top:16px;">Notes personnelles</div>
       <textarea class="notes-area" id="m-notes" placeholder="Vos notes, réflexions..."></textarea>
     </div>
+
     <div class="modal-foot">
-      <button class="btn primary sm" onclick="saveNotes()">💾 Sauvegarder</button>
-      <button class="btn sm" id="m-link-btn">🔗 Ouvrir</button>
-      <button class="btn sm" onclick="copyMd()">📋 Copier MD</button>
-      <button class="btn sm danger" onclick="deleteActive()">🗑️ Supprimer</button>
+      <!-- Boutons mode lecture -->
+      <div id="foot-read">
+        <button class="btn primary sm" onclick="saveNotes()">💾 Sauvegarder notes</button>
+        <button class="btn sm" id="m-link-btn">🔗 Ouvrir</button>
+        <button class="btn sm" onclick="copyMd()">📋 Copier MD</button>
+        <button class="btn sm danger" onclick="deleteActive()">🗑️ Supprimer</button>
+      </div>
+      <!-- Boutons mode édition -->
+      <div id="foot-edit" style="display:none;">
+        <button class="btn primary sm" onclick="saveEdit()">💾 Enregistrer les modifications</button>
+        <button class="btn sm" onclick="exitEditMode()">Annuler</button>
+      </div>
     </div>
   </div>
 </div>

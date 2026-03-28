@@ -845,3 +845,105 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
 
 /* man-fetch-btn loading state */
 #man-fetch-btn.loading { opacity: .6; pointer-events: none; }
+
+/* ════════════════════════════════════════════════════════════
+   DETAIL MODAL — MODE ÉDITION
+════════════════════════════════════════════════════════════ */
+.m-title-input {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  padding: 5px 8px;
+  border: 1px solid var(--accent);
+  border-radius: var(--r);
+  background: var(--surface);
+  font-family: var(--font);
+  color: var(--text);
+  outline: none;
+  margin-bottom: 3px;
+}
+
+.edit-insights-area {
+  min-height: 160px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 0;
+  border-style: solid;
+}
+
+/* ════════════════════════════════════════════════════════════
+   MARKDOWN TOOLBAR
+════════════════════════════════════════════════════════════ */
+.md-toolbar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.md-btn {
+  width: 30px; height: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 12px;
+  color: var(--text2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .12s;
+  flex-shrink: 0;
+}
+.md-btn:hover { background: var(--surface2); border-color: var(--border2); color: var(--text); }
+
+/* ════════════════════════════════════════════════════════════
+   MARKDOWN RENDU — mark highlight
+════════════════════════════════════════════════════════════ */
+.insights-list mark {
+  background: #FEF08A;
+  color: #713F12;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   DETAIL MODAL — label row (label + action)
+════════════════════════════════════════════════════════════ */
+.m-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+.m-label-action {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+.m-label-action:hover { text-decoration: underline; }
+
+/* ════════════════════════════════════════════════════════════
+   QUICK TAG ADD
+════════════════════════════════════════════════════════════ */
+.quick-tag-add {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 12px;
+  margin-bottom: 4px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   MODAL FOOT — deux états (lecture / édition)
+════════════════════════════════════════════════════════════ */
+#foot-read, #foot-edit {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}

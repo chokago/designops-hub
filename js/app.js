@@ -607,12 +607,30 @@ function mergeTags(suggested, manual) {
 }
 
 // ════════════════════════════════════════════════════════════
-// DETAIL MODAL
+// MARKDOWN RENDERER (inline, léger)
+// **gras** _italique_ __souligné__ ==surligné== `code`
+// ════════════════════════════════════════════════════════════
+function renderMd(text) {
+  if (!text) return '';
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/==(.+?)==/g,'<mark>$1</mark>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/__(.+?)__/g,'<u>$1</u>')
+    .replace(/_(.+?)_/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code style="background:var(--surface2);border-radius:3px;padding:1px 4px;font-family:var(--mono);font-size:.9em;">$1</code>');
+}
+
+// ════════════════════════════════════════════════════════════
+// DETAIL MODAL — ouverture
 // ════════════════════════════════════════════════════════════
 function openDetail(id) {
   const r = resources.find(x=>x.id===id);
   if (!r) return;
   activeId = id;
+
+  // Toujours démarrer en mode lecture
+  exitEditMode(false);
 
   const domain = (()=>{try{return new URL(r.url).hostname.replace('www.','');}catch{return '';}})();
   document.getElementById('m-fav').innerHTML = domain
@@ -627,12 +645,165 @@ function openDetail(id) {
   if (r.url) { linkBtn.style.display=''; linkBtn.onclick=()=>window.open(r.url,'_blank'); }
   else linkBtn.style.display='none';
 
-  document.getElementById('m-insights').innerHTML =
-    (r.insights||[]).map((ins,i)=>`<div class="insight"><div class="insight-n">${i+1}</div><div>${ins}</div></div>`).join('')
-    || `<div class="insight"><span style="color:var(--text3)">Aucun insight.</span></div>`;
-
+  renderDetailInsights(r);
   renderDetailTags(r);
+
+  // Fermer le quick-tag-add si ouvert
+  document.getElementById('quick-tag-add').style.display = 'none';
+
   document.getElementById('detail-overlay').classList.add('open');
+}
+
+function renderDetailInsights(r) {
+  document.getElementById('m-insights').innerHTML =
+    (r.insights||[]).map((ins,i)=>
+      `<div class="insight"><div class="insight-n">${i+1}</div><div>${renderMd(ins)}</div></div>`
+    ).join('') || `<div class="insight"><span style="color:var(--text3)">Aucun insight.</span></div>`;
+}
+
+function renderDetailTags(r) {
+  const el = document.getElementById('m-tags');
+  el.innerHTML = (r.tags||[]).map(tid=>pillHTML(tid, true)).join('')
+    || `<span style="color:var(--text3);font-size:12px">Aucun tag</span>`;
+}
+
+// ════════════════════════════════════════════════════════════
+// MODE ÉDITION
+// ════════════════════════════════════════════════════════════
+function enterEditMode() {
+  const r = resources.find(x=>x.id===activeId);
+  if (!r) return;
+
+  // Titre — basculer en input
+  document.getElementById('m-title').style.display       = 'none';
+  document.getElementById('m-title-input').style.display = '';
+  document.getElementById('m-title-input').value         = r.title;
+
+  // Insights — basculer en textarea
+  document.getElementById('insights-read-block').style.display = 'none';
+  document.getElementById('insights-edit-block').style.display = '';
+  document.getElementById('m-insights-edit').value = (r.insights||[]).join('\n');
+
+  // Footer
+  document.getElementById('foot-read').style.display = 'none';
+  document.getElementById('foot-edit').style.display = '';
+
+  // Bouton modifier
+  document.getElementById('m-edit-btn').style.display = 'none';
+
+  // Focus
+  setTimeout(()=>document.getElementById('m-title-input').focus(), 50);
+}
+
+function exitEditMode(render = true) {
+  document.getElementById('m-title').style.display       = '';
+  document.getElementById('m-title-input').style.display = 'none';
+
+  document.getElementById('insights-read-block').style.display = '';
+  document.getElementById('insights-edit-block').style.display = 'none';
+
+  document.getElementById('foot-read').style.display = '';
+  document.getElementById('foot-edit').style.display = 'none';
+
+  document.getElementById('m-edit-btn').style.display = '';
+
+  if (render && activeId) {
+    const r = resources.find(x=>x.id===activeId);
+    if (r) { renderDetailInsights(r); renderDetailTags(r); }
+  }
+}
+
+async function saveEdit() {
+  const r = resources.find(x=>x.id===activeId);
+  if (!r) return;
+
+  const newTitle    = document.getElementById('m-title-input').value.trim();
+  const rawInsights = document.getElementById('m-insights-edit').value;
+
+  if (!newTitle) { toast('Le titre ne peut pas être vide.','err'); return; }
+
+  r.title    = newTitle;
+  r.insights = rawInsights.split('\n').map(s=>s.trim()).filter(Boolean);
+
+  // Mettre à jour l'affichage en mode lecture
+  document.getElementById('m-title').textContent = r.title;
+  exitEditMode(false);
+  renderDetailInsights(r);
+
+  try {
+    await pushToGitHub();
+    render();
+    toast('Modifications enregistrées ✓');
+  } catch(e) {
+    toast('Erreur de sauvegarde','err');
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// TOOLBAR MARKDOWN
+// ════════════════════════════════════════════════════════════
+function mdWrap(before, after) {
+  const ta  = document.getElementById('m-insights-edit');
+  const s   = ta.selectionStart;
+  const e   = ta.selectionEnd;
+  const sel = ta.value.slice(s, e) || 'texte';
+  ta.value  = ta.value.slice(0,s) + before + sel + after + ta.value.slice(e);
+  ta.selectionStart = s + before.length;
+  ta.selectionEnd   = s + before.length + sel.length;
+  ta.focus();
+}
+
+// ════════════════════════════════════════════════════════════
+// QUICK TAG ADD
+// ════════════════════════════════════════════════════════════
+let quickTagSelection = [];
+
+function toggleQuickTagAdd() {
+  const panel = document.getElementById('quick-tag-add');
+  const open  = panel.style.display === 'none';
+  panel.style.display = open ? '' : 'none';
+
+  if (open) {
+    const r = resources.find(x=>x.id===activeId);
+    const existing = r?.tags || [];
+    quickTagSelection = [];
+    renderQuickTagSelector(existing);
+  }
+}
+
+function renderQuickTagSelector(existingTags) {
+  const c = document.getElementById('m-tag-selector');
+  c.innerHTML = '';
+  allTags()
+    .filter(t => !existingTags.includes(t.id)) // seulement les tags non déjà présents
+    .forEach(t => {
+      const b = document.createElement('button');
+      const on = quickTagSelection.includes(t.id);
+      b.className = 'tag-toggle' + (on ? ' on' : '');
+      b.textContent = `${t.e} ${t.label}`;
+      if (on) { const s=tagStyle(t); b.style.cssText=s; }
+      b.onclick = () => {
+        on ? quickTagSelection.splice(quickTagSelection.indexOf(t.id),1) : quickTagSelection.push(t.id);
+        renderQuickTagSelector(existingTags);
+      };
+      c.appendChild(b);
+    });
+
+  if (c.children.length === 0)
+    c.innerHTML = '<span style="font-size:12px;color:var(--text3);">Tous les tags sont déjà appliqués.</span>';
+}
+
+async function applyQuickTags() {
+  if (!quickTagSelection.length) { toggleQuickTagAdd(); return; }
+  const r = resources.find(x=>x.id===activeId);
+  if (!r) return;
+  r.tags = [...new Set([...(r.tags||[]), ...quickTagSelection])];
+  renderDetailTags(r);
+  toggleQuickTagAdd();
+  render();
+  try { await pushToGitHub(); toast(`${quickTagSelection.length} tag${quickTagSelection.length>1?'s':''} ajouté${quickTagSelection.length>1?'s':''} ✓`); }
+  catch(e) { toast('Erreur de sauvegarde','err'); }
+  quickTagSelection = [];
 }
 
 function renderDetailTags(r) {
