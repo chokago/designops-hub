@@ -72,6 +72,12 @@
       "label": "Audit & Conformité",
       "e": "⚖️",
       "color": "#444444"
+    },
+    {
+      "id": "custom-exp-rience-machine-mx--mnajaphb",
+      "label": "Expérience-Machine (MX)",
+      "e": "🤖",
+      "color": "#6366f1"
     }
   ]
 }
