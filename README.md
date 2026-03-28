@@ -1,6 +1,6 @@
 # DesignOps Knowledge Hub — Cdiscount
 
-Base de veille DesignOps alimentée par IA (Claude), hébergée sur GitHub Pages, persistée dans un fichier JSON versionné.
+Base de veille DesignOps alimentée par IA (Claude), hébergée sur GitHub Pages, persistée dans un fichier JSON versionné sur GitHub.
 
 ---
 
@@ -8,11 +8,29 @@ Base de veille DesignOps alimentée par IA (Claude), hébergée sur GitHub Pages
 
 ```
 designops-hub/
-├── index.html          ← L'application complète (HTML/CSS/JS)
+├── index.html          ← Structure HTML de l'application
+├── css/
+│   └── styles.css      ← Styles et thème visuel
+├── js/
+│   └── app.js          ← Logique applicative (GitHub API, Claude API, UI)
 ├── data/
-│   └── resources.json  ← La base de données (JSON versionné par Git)
+│   └── resources.json  ← Base de données (JSON versionné par Git)
 └── README.md
 ```
+
+### Format de `resources.json`
+
+Le fichier contient un objet avec deux clés :
+
+```json
+{
+  "resources": [...],
+  "customTags": [...]
+}
+```
+
+- `resources` — la liste des ressources de veille
+- `customTags` — les thèmes créés manuellement (en plus des 15 thèmes défauts définis dans le code)
 
 ---
 
@@ -20,32 +38,24 @@ designops-hub/
 
 ### 1. Créer le repo GitHub
 
-1. Sur [github.com](https://github.com), cliquer **New repository**
-2. Nom : `designops-hub` (ou ce que tu veux)
-3. Visibilité : **Private** (recommandé — le token est côté client)
-4. Cocher **"Add a README file"** → Create repository
-5. Supprimer le README auto-généré, puis uploader les fichiers :
-   - `index.html` (à la racine)
-   - `data/resources.json` (dans un dossier `data/`)
-
-**Via terminal (plus rapide si tu es à l'aise) :**
 ```bash
 git clone https://github.com/TON-USERNAME/designops-hub.git
 cd designops-hub
-# Copier index.html et data/resources.json ici
+# Copier tous les fichiers ici (index.html, css/, js/, data/, README.md)
 git add .
 git commit -m "init: DesignOps Knowledge Hub"
 git push
 ```
 
+Ou via l'interface GitHub : créer un nouveau repo, uploader les fichiers en respectant la structure ci-dessus.
+
 ---
 
 ### 2. Activer GitHub Pages
 
-1. Dans le repo → **Settings** → **Pages** (sidebar gauche)
+1. Dans le repo → **Settings** → **Pages**
 2. Source : **Deploy from a branch**
-3. Branch : `main` / `(root)`
-4. Cliquer **Save**
+3. Branch : `main` / `(root)` → **Save**
 
 ⏱️ Attendre ~2 minutes → l'outil sera disponible à :
 ```
@@ -56,80 +66,113 @@ https://TON-USERNAME.github.io/designops-hub/
 
 ### 3. Générer un Personal Access Token (PAT)
 
-Le token permet à l'outil d'écrire dans le repo directement depuis le navigateur. Il est stocké **uniquement dans ton localStorage** (jamais dans le repo).
+Permet à l'outil d'écrire dans le repo depuis le navigateur. Stocké uniquement en localStorage, jamais dans le repo.
 
-1. GitHub → **Settings** (ton profil, en haut à droite)
-2. **Developer settings** (tout en bas de la sidebar)
-3. **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
-4. Paramètres :
+1. GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
+2. Paramètres :
    - **Token name** : `designops-hub`
-   - **Expiration** : 1 an (ou No expiration)
-   - **Repository access** : Only select repositories → choisir `designops-hub`
+   - **Expiration** : 1 an
+   - **Repository access** : Only select repositories → `designops-hub`
    - **Permissions** → Repository permissions → **Contents** : `Read and write`
-5. **Generate token** → **Copier le token immédiatement** (il ne s'affiche qu'une fois)
+3. **Generate token** → copier immédiatement (affiché une seule fois)
 
 ---
 
-### 4. Configurer l'outil
+### 4. Générer une clé API Anthropic
+
+Permet l'analyse automatique des ressources par Claude. Stockée uniquement en localStorage.
+
+1. Aller sur [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
+2. **Create Key** → copier la clé (`sk-ant-...`)
+
+Sans cette clé, l'outil fonctionne en **mode manuel** : titre, description et insights sont renseignés manuellement.
+
+---
+
+### 5. Configurer l'outil
 
 1. Ouvrir `https://TON-USERNAME.github.io/designops-hub/`
-2. Dans la sidebar gauche, section **⚙️ GitHub Config** :
-   - **Owner/Repo** : `TON-USERNAME/designops-hub`
-   - **Personal Access Token** : coller le token GitHub copié à l'étape 3
+2. Dans la sidebar, déplier le panneau **GitHub** :
+   - **Owner/Repo** : `TON-USERNAME/designops-hub` ← format court uniquement, sans `https://github.com/`
+   - **Personal Access Token** : coller le token de l'étape 3
    - **Branche** : `main`
-3. Section **🤖 Clé API Claude** :
-   - Aller sur [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys)
-   - Créer une clé → la copier
-   - Coller dans le champ **Anthropic API Key**
-4. Cliquer **💾 Sauvegarder & tester**
-5. L'indicateur en haut passe au vert → ✅ tout est connecté
+   - Cliquer **Tester la connexion** → badge passe au vert ✅
+3. Déplier le panneau **Claude API** :
+   - **Anthropic API Key** : coller la clé de l'étape 4
+   - Cliquer **Tester la clé** → badge passe au vert ✅
+4. Une fois les deux connexions établies, les panneaux se replient automatiquement
 
-> Les deux clés (GitHub PAT + Anthropic API Key) sont sauvegardées dans le localStorage de ton navigateur uniquement.
-> Elles ne sont **jamais** dans le repo ni dans le code.
-> À reconfigurer une seule fois par navigateur/machine (Mac perso → une fois, Mac Cdiscount → une fois).
+> Les clés sont sauvegardées dans le localStorage du navigateur — à reconfigurer une seule fois par navigateur (Mac perso, Mac Cdiscount).
 
 ---
 
-### 5. Utiliser l'outil
+## Stratégie de cache
 
-**Ajouter une ressource :**
-- Onglet **🔗 URL** : coller une URL → cliquer Analyser
-- Onglet **📋 Texte** : coller un extrait → cliquer Analyser
-- Claude génère automatiquement : titre, résumé, TL;DR, insights clés, tags suggérés
-- La ressource est sauvegardée dans `data/resources.json` via l'API GitHub
+L'outil utilise un cache localStorage partiel pour améliorer la réactivité au chargement.
 
-**Chaque ajout crée un commit dans le repo** — tu as un historique complet de ta veille.
+**Ce qui est mis en cache — les `resources` uniquement.**
+Au démarrage, les ressources s'affichent instantanément depuis le cache local pendant que GitHub est contacté en arrière-plan. Une fois GitHub répondu, l'UI est mise à jour si le contenu a changé.
 
-**Sur le Mac Cdiscount :**
-1. Ouvrir l'URL GitHub Pages dans n'importe quel navigateur
-2. Reconfigurer le token dans la sidebar (une seule fois par navigateur)
-3. L'outil charge automatiquement la base depuis GitHub → toujours à jour
+**Ce qui n'est jamais mis en cache — les `customTags`.**
+Les thèmes (noms, descriptions, couleurs) sont toujours chargés frais depuis GitHub. Cela garantit qu'une modification dans "Gérer les thèmes" est immédiatement visible après rechargement, sans avoir à faire de `git pull`.
+
+Clé localStorage utilisée : `doh-resources-cache`
+
+---
+
+## Utilisation
+
+### Ajouter une ressource
+
+**Avec la clé Claude configurée :**
+- Coller une URL → **✨ Analyser** → Claude génère titre, résumé, TL;DR, insights et suggère des tags
+- Ou coller un extrait de texte → **✨ Analyser le texte**
+
+**Sans clé Claude (mode manuel) :**
+- Coller une URL → **+ Ajouter** → une modale s'ouvre
+- Le bouton **Récupérer le titre** tente d'extraire automatiquement titre et description via Microlink (gratuit, sans clé)
+- Renseigner manuellement titre, description et insights (1 par ligne, Markdown supporté)
+- Sélectionner au moins un tag
+
+Chaque ajout crée un commit Git — historique complet de la veille, rollback possible.
+
+### Modifier une ressource
+
+Cliquer sur une ressource → **✏️ Modifier** pour éditer en place :
+- Titre
+- TL;DR
+- Insights (avec éditeur Markdown — onglets **✏️ Éditer** / **👁 Aperçu**)
+
+Syntaxe Markdown supportée dans les insights :
+
+| Syntaxe | Rendu |
+|---|---|
+| `**texte**` | **gras** |
+| `_texte_` | _italique_ |
+| `__texte__` | souligné |
+| `==texte==` | surligné (jaune) |
+| `` `texte` `` | `code` |
+
+### Gérer les thèmes
+
+Sidebar → **+ Gérer** : créer, renommer, recolorer, décrire ou supprimer des thèmes. Un thème utilisé dans au moins une ressource ne peut pas être supprimé — retirer d'abord le tag des ressources concernées via la fiche détail (bouton × sur chaque pill).
+
+15 thèmes sont prédéfinis dans le code. Les thèmes custom sont persistés dans `customTags` du JSON GitHub.
 
 ---
 
 ## Workflow FigJam
 
-Pour alimenter un board FigJam depuis cette base :
+1. Filtrer par tag ou rechercher dans le hub
+2. Ouvrir une ressource → **📋 Copier MD**
+3. Coller dans FigJam (sticky note, zone texte)
 
-1. Filtrer par tag ou recherche dans le hub
-2. Cliquer sur une ressource → **📋 Copier MD**
-3. Coller dans FigJam (sticky note ou section texte)
-
-Ou : **📤 Exporter** → copier tout le Markdown → coller dans une zone FigJam ou dans Notion/OneNote.
+Ou : **📤 Exporter** → copier le Markdown complet de toute la base → coller dans Notion, OneNote ou FigJam.
 
 ---
 
 ## Sécurité
 
-- Le token GitHub est stocké en **localStorage uniquement** — jamais dans le code ni dans le repo
-- Le repo peut être **privé** — GitHub Pages fonctionne en privé avec un compte payant, ou tu peux garder le repo public (les données de veille ne sont pas sensibles)
-- Si le token expire, en générer un nouveau et le reconfigurer dans la sidebar
-
----
-
-## Évolutions possibles
-
-- [ ] Ajouter un champ "Problématique" pour taguer les ressources selon un contexte mission (ex: "RGAA Q2", "Gouvernance Discover")
-- [ ] Webhook GitHub → notification Slack lors d'un ajout
-- [ ] Export automatique vers Notion via l'API Notion
-- [ ] Mode hors-ligne avec sync au retour de connexion
+- Le token GitHub PAT et la clé API Claude sont stockés en **localStorage uniquement** — jamais dans le code ni dans le repo
+- Le repo peut rester **privé** (GitHub Pages fonctionne gratuitement en repo public)
+- Si un token expire, en générer un nouveau et le reconfigurer dans la sidebar
