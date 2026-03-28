@@ -1,6 +1,32 @@
 {
   "resources": [
     {
+      "id": "1774721579997",
+      "url": "https://awards.zeroheight.com/voting/docs-ebay",
+      "title": "Skin d'eBay : documentation unifiée pour marketplace mondiale",
+      "summary": "Le système de design \"Skin\" centralise les standards visuels et techniques pour harmoniser l'expérience d'achat d'eBay à travers le monde. Il fournit des directives strictes qui permettent de maintenir la cohérence de l'interface sur le Web, Android et iOS malgré une échelle massive de contenus.",
+      "tldr": "Le système de design \"Skin\" centralise les standards visuels et techniques pour harmoniser l'expérience d'achat d'eBay à travers le monde. Il fournit des directives strictes qui permettent de maintenir la cohérence de l'interface sur le Web, Android et iOS malgré une échelle massive de contenus.",
+      "insights": [
+        "Standardisation à l'échelle mondiale : Le système gère la cohérence pour plus de 133 millions d'utilisateurs et 1,8 milliard d'annonces.",
+        "**__Accessibilité native__** : ==Les composants sont conçus pour être accessibles dès leur création, garantissant une expérience inclusive pour tous les acheteurs.==",
+        "**__Documentation multi-plateforme__** : Une source unique de vérité regroupant les spécificités pour le Web, iOS et Android afin d'aligner les équipes techniques.",
+        "**__Architecture modulaire__** : Utilisation de composants flexibles capables de s'adapter aux besoins variés des différents marchés d'eBay.",
+        "Réduction de la friction : Les directives claires facilitent le passage du design au code, accélérant ainsi les cycles de développement.",
+        "Gouvernance centralisée : Un cadre rigoureux assure que chaque mise à jour est propagée efficacement à travers l'ensemble de l'écosystème.",
+        "Focus sur la performance : Le système privilégie des solutions légères pour garantir un chargement rapide, crucial pour le e-commerce."
+      ],
+      "tags": [
+        "design-system",
+        "e-commerce",
+        "accessibilite",
+        "gouvernance",
+        "veille",
+        "custom-roi-impact-mnaj7d7r"
+      ],
+      "notes": "",
+      "createdAt": 1774721579999
+    },
+    {
       "id": "1774718013495",
       "url": "https://awards.zeroheight.com/voting/inno-paiella",
       "title": "Saffron pAIella : automatisation intelligente du design-to-code par l'IA",
