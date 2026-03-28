@@ -1,6 +1,34 @@
 {
   "resources": [
     {
+      "id": "1774722325587",
+      "url": "https://www.designsystemspodcast.com/episodes/episode/7bc8c7c5/135-the-infrastructure-behind-digital-production-a-conversation-with-steve-dodier-lazaro",
+      "title": "Le design system comme infrastructure et écosystème partagé",
+      "summary": "Cet échange explore comment les systèmes de design créent des dépendances vitales au sein des flux de production logicielle. Il met en lumière le rôle futur de l'IA pour interpréter les connaissances ambiguës et les transformer en standards techniques actionnables.",
+      "tldr": "Cet échange explore comment les systèmes de design créent des dépendances vitales au sein des flux de production logicielle. Il met en lumière le rôle futur de l'IA pour interpréter les connaissances ambiguës et les transformer en standards techniques actionnables.",
+      "insights": [
+        "Infrastructure vs Produit : Un système de design est une infrastructure car les équipes de développement dépendent de sa fiabilité pour livrer en production.",
+        "==Besoin de maintenance : Contrairement à un produit fini, une infrastructure défaillante bloque toute la chaîne de valeur, rendant sa maintenance critique.==",
+        "Partage communautaire : Il est nécessaire de transformer les scripts internes spécialisés en outils open source réutilisables pour faire progresser l'industrie.",
+        "Le \"nœud gordien\" des tokens : La traduction des design tokens reste complexe à cause de l'absence de formats d'échange standards entre les sources (Figma) et le code.",
+        "L'IA comme interprète : Les LLM sont idéalement placés pour comprendre les directives d'utilisation ambiguës et les contextualiser dans un environnement technique précis.",
+        "Systèmes comme dépôts de connaissances : Les systèmes de design doivent devenir des dépôts de connaissances structurés, accessibles par API pour des outils tiers ou des IA.",
+        "Contextualisation automatique : L'avenir réside dans la mise à disposition du contexte (ex: application TV vs mobile) pour que l'IA adapte automatiquement les composants et styles."
+      ],
+      "tags": [
+        "design-system",
+        "gouvernance",
+        "tokens",
+        "ia-generation",
+        "experience-machine",
+        "design-to-code",
+        "storybook",
+        "veille"
+      ],
+      "notes": "",
+      "createdAt": 1774722325589
+    },
+    {
       "id": "1774721959340",
       "url": "https://www.linkedin.com/pulse/claude-desktop-figma-mcp-complete-setup-guide-2026-garima-agarwal-kreaf/",
       "title": "Intégration Claude Desktop et Figma MCP : Guide 2026",
