@@ -176,7 +176,11 @@
 
     <div class="modal-body">
       <div class="m-label">TL;DR</div>
-      <div class="tldr-block"><p id="m-tldr"></p></div>
+      <!-- Mode lecture -->
+      <div class="tldr-block" id="tldr-read"><p id="m-tldr"></p></div>
+      <!-- Mode édition -->
+      <textarea class="paste-area tldr-edit-area" id="m-tldr-edit"
+        style="display:none;" placeholder="Résumé approfondi de la ressource..."></textarea>
 
       <!-- INSIGHTS — mode lecture -->
       <div id="insights-read-block">

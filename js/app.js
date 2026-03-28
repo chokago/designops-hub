@@ -674,12 +674,17 @@ function enterEditMode() {
   const r = resources.find(x=>x.id===activeId);
   if (!r) return;
 
-  // Titre — basculer en input
+  // Titre
   document.getElementById('m-title').style.display       = 'none';
   document.getElementById('m-title-input').style.display = '';
   document.getElementById('m-title-input').value         = r.title;
 
-  // Insights — basculer en textarea
+  // TL;DR
+  document.getElementById('tldr-read').style.display      = 'none';
+  document.getElementById('m-tldr-edit').style.display    = '';
+  document.getElementById('m-tldr-edit').value            = r.tldr || r.summary || '';
+
+  // Insights
   document.getElementById('insights-read-block').style.display = 'none';
   document.getElementById('insights-edit-block').style.display = '';
   document.getElementById('m-insights-edit').value = (r.insights||[]).join('\n');
@@ -691,13 +696,15 @@ function enterEditMode() {
   // Bouton modifier
   document.getElementById('m-edit-btn').style.display = 'none';
 
-  // Focus
   setTimeout(()=>document.getElementById('m-title-input').focus(), 50);
 }
 
 function exitEditMode(render = true) {
   document.getElementById('m-title').style.display       = '';
   document.getElementById('m-title-input').style.display = 'none';
+
+  document.getElementById('tldr-read').style.display   = '';
+  document.getElementById('m-tldr-edit').style.display = 'none';
 
   document.getElementById('insights-read-block').style.display = '';
   document.getElementById('insights-edit-block').style.display = 'none';
@@ -707,7 +714,6 @@ function exitEditMode(render = true) {
 
   document.getElementById('m-edit-btn').style.display = '';
 
-  // Remettre l'onglet Éditer par défaut pour la prochaine ouverture
   switchEditorTab('edit');
 
   if (render && activeId) {
@@ -721,15 +727,18 @@ async function saveEdit() {
   if (!r) return;
 
   const newTitle    = document.getElementById('m-title-input').value.trim();
+  const newTldr     = document.getElementById('m-tldr-edit').value.trim();
   const rawInsights = document.getElementById('m-insights-edit').value;
 
   if (!newTitle) { toast('Le titre ne peut pas être vide.','err'); return; }
 
   r.title    = newTitle;
+  r.tldr     = newTldr;
   r.insights = rawInsights.split('\n').map(s=>s.trim()).filter(Boolean);
 
   // Mettre à jour l'affichage en mode lecture
   document.getElementById('m-title').textContent = r.title;
+  document.getElementById('m-tldr').textContent  = r.tldr;
   exitEditMode(false);
   renderDetailInsights(r);
 
