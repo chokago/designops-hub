@@ -60,15 +60,29 @@ header {
   height: var(--header-h);
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  display: flex;
+  /* Grid 3 col : gauche (burger) | centre (logo) | droite (actions)
+     Le logo est toujours optiquement centré dans le header */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: 0 20px;
-  gap: 12px;
+  gap: 8px;
 }
 
-/* Logo */
-.logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+/* Colonne gauche */
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Colonne centre — logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
 
 .logo-mark {
   width: 30px; height: 30px;
@@ -83,12 +97,12 @@ header {
 .logo-text { font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
 .logo-sub  { font-size: 11px; color: var(--text3); font-weight: 400; line-height: 1; margin-top: 1px; }
 
-/* Header right */
+/* Colonne droite — actions */
 .header-right {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
-  flex-shrink: 0;
 }
 
 .sync-indicator {
@@ -217,7 +231,7 @@ aside {
   display: none;
   position: fixed; inset: 0;
   background: rgba(0,0,0,.35);
-  z-index: 90;
+  z-index: 101;
 }
 .sidebar-overlay.open { display: block; }
 
@@ -538,17 +552,15 @@ textarea::placeholder, input::placeholder { color: var(--text3); }
    RESPONSIVE — Tablet (≤ 900px)
 ════════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
-  /* Sidebar devient un drawer */
+  /* Sidebar devient un drawer full-height au-dessus de tout */
   aside {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    z-index: 95;
+    z-index: 102;
     transform: translateX(-100%);
     box-shadow: var(--sh2);
-    /* On laisse un espace pour ne pas couvrir le header
-       mais on part du haut pour un vrai drawer full-height */
   }
 
   aside.open {

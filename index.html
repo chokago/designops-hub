@@ -13,14 +13,16 @@
 ════════════════════════════════════════════════════════ -->
 <header>
 
-  <!-- Burger (visible ≤ 900px) -->
-  <button class="burger-btn" onclick="toggleSidebar()" aria-label="Ouvrir le menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  <!-- Colonne gauche : burger (visible ≤ 900px) -->
+  <div class="header-left">
+    <button class="burger-btn" onclick="toggleSidebar()" aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 
-  <!-- Logo -->
+  <!-- Colonne centre : logo -->
   <div class="logo">
     <div class="logo-mark">DO</div>
     <div>
@@ -29,7 +31,7 @@
     </div>
   </div>
 
-  <!-- Header right -->
+  <!-- Colonne droite : actions -->
   <div class="header-right">
     <div class="sync-indicator">
       <div class="sync-dot" id="sync-dot"></div>
