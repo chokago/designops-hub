@@ -69,49 +69,76 @@ async function ghWrite(json, sha) {
 }
 
 async function loadFromGitHub() {
-  if (!cfg.repo || !cfg.token) { setSyncState('none'); return; }
-  setSyncState('busy', 'Chargement…');
+  if (!cfg.repo || !cfg.token) { setConnBadge('gh', 'none'); return; }
+  setConnBadge('gh', 'busy', 'chargement…');
   try {
     const { json } = await ghRead();
     resources = json;
-    setSyncState('ok', `synced · ${resources.length} ressources`);
+    setConnBadge('gh', 'ok', 'synced');
+    setConnError('gh', null);
     render();
     renderTagFilters();
   } catch (e) {
-    setSyncState('error', 'Erreur de connexion');
+    setConnBadge('gh', 'error', 'erreur');
+    setConnError('gh', parseGhError(e));
     console.error(e);
   }
 }
 
 async function pushToGitHub() {
   if (!cfg.repo || !cfg.token) return;
-  setSyncState('busy', 'Sauvegarde…');
+  setConnBadge('gh', 'busy', 'sauvegarde…');
   try {
     const { sha } = await ghRead();
     await ghWrite(resources, sha);
-    setSyncState('ok', `synced · ${resources.length} ressources`);
+    setConnBadge('gh', 'ok', 'synced');
   } catch (e) {
-    setSyncState('error', 'Erreur de sauvegarde');
+    setConnBadge('gh', 'error', 'erreur');
+    setConnError('gh', parseGhError(e));
     console.error(e);
     throw e;
   }
 }
 
 // ════════════════════════════════════════════════════════════
-// SYNC INDICATOR
+// CONNECTION BADGES (remplace l'ancien setSyncState)
 // ════════════════════════════════════════════════════════════
-function setSyncState(state, label) {
-  const dot = document.getElementById('sync-dot');
-  const lbl = document.getElementById('sync-label');
-  dot.className = 'sync-dot';
-  if (state === 'ok')    { dot.classList.add('ok');    lbl.textContent = label || 'synchronisé'; }
-  if (state === 'error') { dot.classList.add('error'); lbl.textContent = label || 'erreur'; }
-  if (state === 'busy')  { dot.classList.add('busy');  lbl.textContent = label || '…'; }
-  if (state === 'none')  { lbl.textContent = 'non configuré'; }
+function setConnBadge(which, state, label) {
+  // which = 'gh' | 'claude'
+  const dot = document.getElementById(`${which}-dot`);
+  const lbl = document.getElementById(`${which}-label`);
+  if (!dot || !lbl) return;
+  dot.className = 'conn-dot';
+  if (state === 'ok')   { dot.classList.add('ok');    lbl.textContent = label || 'connecté'; }
+  if (state === 'error'){ dot.classList.add('error'); lbl.textContent = label || 'erreur'; }
+  if (state === 'busy') { dot.classList.add('busy');  lbl.textContent = label || '…'; }
+  if (state === 'none') { lbl.textContent = label || '—'; }
+}
+
+function setConnError(which, msg) {
+  const el = document.getElementById(`${which}-error`);
+  if (!el) return;
+  if (msg) { el.textContent = msg; el.classList.add('visible'); }
+  else     { el.textContent = '';  el.classList.remove('visible'); }
 }
 
 // ════════════════════════════════════════════════════════════
-// CONFIG
+// TOAST
+// ════════════════════════════════════════════════════════════
+function toast(msg, type = 'ok') {
+  const container = document.getElementById('toast-container');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.textContent = (type === 'ok' ? '✓ ' : '✕ ') + msg;
+  container.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('out');
+    el.addEventListener('animationend', () => el.remove());
+  }, 3000);
+}
+
+// ════════════════════════════════════════════════════════════
+// CONFIG — chargement
 // ════════════════════════════════════════════════════════════
 function loadConfig() {
   document.getElementById('cfg-repo').value      = cfg.repo;
@@ -120,16 +147,123 @@ function loadConfig() {
   document.getElementById('cfg-anthropic').value = cfg.anthropicKey;
 }
 
-async function saveConfig() {
-  cfg.repo         = document.getElementById('cfg-repo').value.trim();
-  cfg.token        = document.getElementById('cfg-token').value.trim();
-  cfg.branch       = document.getElementById('cfg-branch').value.trim() || 'main';
+// ════════════════════════════════════════════════════════════
+// SAVE & TEST — GitHub
+// ════════════════════════════════════════════════════════════
+async function saveGitHub() {
+  cfg.repo   = document.getElementById('cfg-repo').value.trim();
+  cfg.token  = document.getElementById('cfg-token').value.trim();
+  cfg.branch = document.getElementById('cfg-branch').value.trim() || 'main';
+  localStorage.setItem('gh-repo',   cfg.repo);
+  localStorage.setItem('gh-token',  cfg.token);
+  localStorage.setItem('gh-branch', cfg.branch);
+
+  setConnError('gh', null);
+
+  if (!cfg.repo || !cfg.token) {
+    setConnBadge('gh', 'none', '—');
+    setConnError('gh', 'Remplis le repo et le token avant de tester.');
+    return;
+  }
+
+  const btn = document.getElementById('gh-save-btn');
+  btn.disabled = true;
+  btn.textContent = 'Connexion…';
+  setConnBadge('gh', 'busy');
+
+  try {
+    const { json } = await ghRead();
+    resources = json;
+    setConnBadge('gh', 'ok', 'synced');
+    setConnError('gh', null);
+    toast(`GitHub connecté — ${resources.length} ressource${resources.length > 1 ? 's' : ''} chargée${resources.length > 1 ? 's' : ''}`);
+    render();
+    renderTagFilters();
+  } catch (e) {
+    const msg = parseGhError(e);
+    setConnBadge('gh', 'error', 'erreur');
+    setConnError('gh', msg);
+    toast(msg, 'err');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Tester la connexion';
+}
+
+function parseGhError(e) {
+  const m = e.message || '';
+  if (m.includes('404'))  return 'Repo introuvable. Vérifie le format "username/repo-name".';
+  if (m.includes('401'))  return 'Token invalide ou expiré. Génère-en un nouveau sur GitHub.';
+  if (m.includes('403'))  return 'Accès refusé. Vérifie les permissions du token (Contents: Read & Write).';
+  if (m.includes('CORS') || m.includes('fetch')) return 'Erreur réseau. Vérifie ta connexion internet.';
+  return `Erreur : ${m.slice(0, 80)}`;
+}
+
+// ════════════════════════════════════════════════════════════
+// SAVE & TEST — Claude API
+// ════════════════════════════════════════════════════════════
+async function saveClaude() {
   cfg.anthropicKey = document.getElementById('cfg-anthropic').value.trim();
-  localStorage.setItem('gh-repo',       cfg.repo);
-  localStorage.setItem('gh-token',      cfg.token);
-  localStorage.setItem('gh-branch',     cfg.branch);
   localStorage.setItem('anthropic-key', cfg.anthropicKey);
-  await loadFromGitHub();
+
+  setConnError('claude', null);
+
+  if (!cfg.anthropicKey) {
+    setConnBadge('claude', 'none', '—');
+    setConnError('claude', 'Renseigne ta clé API Anthropic.');
+    return;
+  }
+
+  const btn = document.getElementById('claude-save-btn');
+  btn.disabled = true;
+  btn.textContent = 'Test en cours…';
+  setConnBadge('claude', 'busy');
+
+  try {
+    // Ping minimal — 1 token pour valider la clé
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': cfg.anthropicKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1,
+        messages: [{ role: 'user', content: 'ok' }],
+      }),
+    });
+    if (!r.ok) {
+      const err = await r.json();
+      throw new Error(err.error?.message || String(r.status));
+    }
+    setConnBadge('claude', 'ok', 'validée');
+    setConnError('claude', null);
+    toast('Clé Claude validée ✓');
+  } catch (e) {
+    const msg = parseClaudeError(e);
+    setConnBadge('claude', 'error', 'erreur');
+    setConnError('claude', msg);
+    toast(msg, 'err');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Tester la clé';
+}
+
+function parseClaudeError(e) {
+  const m = e.message || '';
+  if (m.includes('401') || m.toLowerCase().includes('invalid x-api-key') || m.toLowerCase().includes('authentication'))
+    return 'Clé API invalide. Vérifie sur console.anthropic.com.';
+  if (m.includes('403'))
+    return 'Accès refusé. Vérifie que la clé est active et a les bons droits.';
+  if (m.includes('429'))
+    return 'Quota dépassé ou rate limit. Vérifie ton plan Anthropic.';
+  if (m.includes('fetch') || m.includes('CORS') || m.includes('network'))
+    return 'Erreur réseau. Vérifie ta connexion.';
+  return `Erreur : ${m.slice(0, 80)}`;
 }
 
 // ════════════════════════════════════════════════════════════
@@ -285,9 +419,11 @@ async function addFromUrl() {
     const data = await callClaude(buildPrompt(url, null));
     await createResource({ ...data, url });
     document.getElementById('url-input').value = '';
-    showStatus('Ressource ajoutée et sauvegardée sur GitHub ✓', 'ok');
+    showStatus('Ressource ajoutée ✓', 'ok');
+    toast('Ressource ajoutée et sauvegardée sur GitHub');
   } catch (e) {
     showStatus('Erreur : ' + e.message, 'err');
+    toast(e.message, 'err');
   }
   setLoading('btn-url', false);
 }
@@ -301,9 +437,11 @@ async function addFromText() {
     const data = await callClaude(buildPrompt(null, text));
     await createResource({ ...data, url: '' });
     document.getElementById('text-input').value = '';
-    showStatus('Ressource ajoutée et sauvegardée sur GitHub ✓', 'ok');
+    showStatus('Ressource ajoutée ✓', 'ok');
+    toast('Ressource ajoutée et sauvegardée sur GitHub');
   } catch (e) {
     showStatus('Erreur : ' + e.message, 'err');
+    toast(e.message, 'err');
   }
   setLoading('btn-text', false);
 }
@@ -432,8 +570,10 @@ async function saveNotes() {
   try {
     await pushToGitHub();
     showStatus('Notes sauvegardées ✓', 'ok');
+    toast('Notes sauvegardées');
   } catch (e) {
     showStatus('Erreur de sauvegarde', 'err');
+    toast('Erreur de sauvegarde', 'err');
   }
 }
 
@@ -526,4 +666,10 @@ loadConfig();
 renderTagSelector();
 renderTagFilters();
 render();
+
+// Restaurer les états des badges au chargement
+if (cfg.anthropicKey) setConnBadge('claude', 'ok', 'validée');
+else setConnBadge('claude', 'none', '—');
+
+// Charger les données GitHub (met à jour le badge gh automatiquement)
 loadFromGitHub();

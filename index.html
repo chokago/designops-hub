@@ -33,10 +33,6 @@
 
   <!-- Colonne droite : actions -->
   <div class="header-right">
-    <div class="sync-indicator">
-      <div class="sync-dot" id="sync-dot"></div>
-      <span id="sync-label">non connecté</span>
-    </div>
     <span id="total-badge" style="font-size:11px; color:var(--text3); font-family:var(--mono); white-space:nowrap;">0 ressources</span>
     <button class="btn sm" onclick="openExport()">📤 Exporter</button>
   </div>
@@ -76,10 +72,17 @@
       <div id="tag-filters"></div>
     </div>
 
-    <div class="side-section" style="margin-top:auto; padding-top:12px;">
-      <div class="settings-panel">
+    <div class="side-section" style="margin-top:auto; padding-top:12px; display:flex; flex-direction:column; gap:10px;">
 
-        <h4>⚙️ GitHub Config</h4>
+      <!-- Panel GitHub -->
+      <div class="settings-panel">
+        <div class="settings-panel-head">
+          <h4>⚙️ GitHub</h4>
+          <div class="conn-badge" id="gh-badge">
+            <span class="conn-dot" id="gh-dot"></span>
+            <span id="gh-label">—</span>
+          </div>
+        </div>
         <div class="settings-row">
           <label>Owner/Repo</label>
           <input type="text" id="cfg-repo" placeholder="username/repo-name" />
@@ -92,23 +95,32 @@
           <label>Branche</label>
           <input type="text" id="cfg-branch" placeholder="main" />
         </div>
+        <div class="settings-error" id="gh-error"></div>
+        <button class="settings-save" id="gh-save-btn" onclick="saveGitHub()">Tester la connexion</button>
+      </div>
 
-        <div class="settings-divider"></div>
-
-        <h4 style="margin-bottom:10px;">🤖 Clé API Claude</h4>
+      <!-- Panel Claude API -->
+      <div class="settings-panel">
+        <div class="settings-panel-head">
+          <h4>🤖 Claude API</h4>
+          <div class="conn-badge" id="claude-badge">
+            <span class="conn-dot" id="claude-dot"></span>
+            <span id="claude-label">—</span>
+          </div>
+        </div>
         <div class="settings-row">
           <label>Anthropic API Key</label>
           <input type="password" id="cfg-anthropic" placeholder="sk-ant-xxxxxxxxxxxx" />
         </div>
-        <div style="font-size:10px; color:var(--text3); line-height:1.5; margin-bottom:10px;">
-          Stockée uniquement dans ton navigateur (localStorage). Jamais dans le repo.
+        <div style="font-size:10px; color:var(--text3); line-height:1.5; margin-bottom:8px;">
+          Stockée dans ton navigateur uniquement. Jamais dans le repo.
           <a href="https://console.anthropic.com/settings/keys" target="_blank"
              style="color:var(--accent); text-decoration:none;">Obtenir une clé →</a>
         </div>
-
-        <button class="settings-save" onclick="saveConfig()">💾 Sauvegarder &amp; tester</button>
-
+        <div class="settings-error" id="claude-error"></div>
+        <button class="settings-save" id="claude-save-btn" onclick="saveClaude()">Tester la clé</button>
       </div>
+
     </div>
 
   </aside>
@@ -233,6 +245,9 @@
     </div>
   </div>
 </div>
+
+<!-- Toast notifications -->
+<div id="toast-container" aria-live="polite"></div>
 
 <script src="js/app.js"></script>
 </body>
