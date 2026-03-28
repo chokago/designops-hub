@@ -186,17 +186,32 @@
 
       <!-- INSIGHTS — mode édition -->
       <div id="insights-edit-block" style="display:none;">
-        <div class="m-label">Insights clés
-          <span style="font-weight:400;color:var(--text3);font-size:10px;margin-left:6px;">— 1 par ligne · **gras** _italique_ ==surligné==</span>
+        <div class="m-label" style="margin-bottom:8px;">Insights clés</div>
+
+        <!-- Onglets Éditer / Aperçu -->
+        <div class="editor-tabs">
+          <button class="editor-tab active" id="tab-edit" onclick="switchEditorTab('edit')">✏️ Éditer</button>
+          <button class="editor-tab" id="tab-preview" onclick="switchEditorTab('preview')">👁 Aperçu</button>
+          <span class="editor-tab-hint">**gras** &nbsp;_italique_ &nbsp;__souligné__ &nbsp;==surligné==</span>
         </div>
-        <div class="md-toolbar">
-          <button class="md-btn" onclick="mdWrap('**','**')" title="Gras"><b>B</b></button>
-          <button class="md-btn" onclick="mdWrap('_','_')" title="Italique"><i>I</i></button>
-          <button class="md-btn" onclick="mdWrap('__','__')" title="Souligné"><u>U</u></button>
-          <button class="md-btn" onclick="mdWrap('==','==')" title="Surligner">🖊</button>
+
+        <!-- Panneau Éditer -->
+        <div id="editor-pane-edit">
+          <div class="md-toolbar">
+            <button class="md-btn" onclick="mdWrap('**','**')" title="Gras"><b>B</b></button>
+            <button class="md-btn" onclick="mdWrap('_','_')" title="Italique"><i>I</i></button>
+            <button class="md-btn" onclick="mdWrap('__','__')" title="Souligné"><u>U</u></button>
+            <button class="md-btn" onclick="mdWrap('==','==')" title="Surligner">🖊</button>
+            <button class="md-btn" onclick="mdWrap('`','`')" title="Code">{ }</button>
+          </div>
+          <textarea class="paste-area edit-insights-area" id="m-insights-edit"
+            placeholder="Un insight par ligne...&#10;Utilisez **gras**, _italique_, ==surlignage=="></textarea>
         </div>
-        <textarea class="paste-area edit-insights-area" id="m-insights-edit"
-          placeholder="Un insight par ligne...&#10;Utilisez **gras**, _italique_, ==surlignage=="></textarea>
+
+        <!-- Panneau Aperçu -->
+        <div id="editor-pane-preview" style="display:none;">
+          <div class="editor-preview-box" id="editor-preview-content"></div>
+        </div>
       </div>
 
       <!-- TAGS — section toujours visible -->

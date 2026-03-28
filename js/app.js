@@ -79,7 +79,7 @@ async function ghRead() {
   if (!r.ok) throw new Error(`${r.status}`);
   const data = await r.json();
   return {
-    json: JSON.parse(atob(data.content.replace(/\n/g,''))),
+    json: JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))))),
     sha: data.sha
   };
 }
@@ -707,6 +707,9 @@ function exitEditMode(render = true) {
 
   document.getElementById('m-edit-btn').style.display = '';
 
+  // Remettre l'onglet Éditer par défaut pour la prochaine ouverture
+  switchEditorTab('edit');
+
   if (render && activeId) {
     const r = resources.find(x=>x.id===activeId);
     if (r) { renderDetailInsights(r); renderDetailTags(r); }
@@ -736,6 +739,41 @@ async function saveEdit() {
     toast('Modifications enregistrées ✓');
   } catch(e) {
     toast('Erreur de sauvegarde','err');
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// TOGGLE ÉDITER / APERÇU
+// ════════════════════════════════════════════════════════════
+function switchEditorTab(tab) {
+  const editPane    = document.getElementById('editor-pane-edit');
+  const previewPane = document.getElementById('editor-pane-preview');
+  const tabEdit     = document.getElementById('tab-edit');
+  const tabPreview  = document.getElementById('tab-preview');
+  if (!editPane) return; // éléments pas encore dans le DOM
+
+  if (tab === 'preview') {
+    // Générer l'aperçu depuis le contenu actuel du textarea
+    const raw     = document.getElementById('m-insights-edit').value;
+    const lines   = raw.split('\n').map(s=>s.trim()).filter(Boolean);
+    const preview = document.getElementById('editor-preview-content');
+
+    preview.innerHTML = lines.length
+      ? lines.map((ins,i) =>
+          `<div class="insight"><div class="insight-n">${i+1}</div><div>${renderMd(ins)}</div></div>`
+        ).join('')
+      : `<div class="insight"><span style="color:var(--text3)">Aucun insight à prévisualiser.</span></div>`;
+
+    editPane.style.display    = 'none';
+    previewPane.style.display = '';
+    tabEdit.classList.remove('active');
+    tabPreview.classList.add('active');
+  } else {
+    editPane.style.display    = '';
+    previewPane.style.display = 'none';
+    tabEdit.classList.add('active');
+    tabPreview.classList.remove('active');
+    document.getElementById('m-insights-edit').focus();
   }
 }
 
