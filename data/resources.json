@@ -1,6 +1,32 @@
 {
   "resources": [
     {
+      "id": "1774748975195",
+      "url": "https://designsystems.surf/articles/typography-system-101-a-step-by-step-guide",
+      "title": "Bâtir une architecture typographique évolutive et logique",
+      "summary": "Ce guide propose une méthodologie rigoureuse pour transformer une simple liste de styles visuels en une chaîne logique cohérente. Il permet de construire un système où chaque décision (échelle, tokens, rôles) renforce la structure globale, facilitant la maintenance et l'adaptation responsive sans retouches manuelles.",
+      "tldr": "Ce guide propose une méthodologie rigoureuse pour transformer une simple liste de styles visuels en une chaîne logique cohérente. Il permet de construire un système où chaque décision (échelle, tokens, rôles) renforce la structure globale, facilitant la maintenance et l'adaptation responsive sans retouches manuelles.",
+      "insights": [
+        "La pyramide de responsabilités : Un système sain repose sur cinq couches distinctes : Échelles, Tokens Primitifs, Rôles Textuels, Tokens Sémantiques et enfin Styles de Texte.",
+        "==L'Échelle comme colonne vertébrale : La hiérarchie doit s'appuyer sur un ratio mathématique constant (ex. Major Second ou Minor Third) pour garantir des relations visuelles prévisibles.==",
+        "Abstraction des Tokens Primitifs : Ces tokens décrivent uniquement les propriétés neutres (taille, poids, famille) sans connaître leur futur usage (ex. font-size-400).",
+        "==Sémantique par les Rôles : Définir des intentions claires (Display, Headline, Body, Label) permet de créer un langage commun entre designers et développeurs, remplaçant le débat sur les pixels par une discussion sur l'usage.==",
+        "Tokens Sémantiques de liaison : Ils font le pont entre le rôle et la valeur concrète, permettant de changer une décision globale (ex. la taille de tout le \"Body\") en un seul point.",
+        "Logique responsive native : Le comportement responsive doit être intégré dans les modes des tokens (Desktop, Tablet, Mobile) plutôt que d'être géré par des styles d'exception.",
+        "L'indépendance des Styles de Texte : Les styles finaux ne doivent contenir aucune valeur \"en dur\" mais pointer exclusivement vers les tokens sémantiques pour rester robustes.",
+        "Gouvernance anti-dérive : Un système sans règles de modification ou de dépréciation finit inévitablement par accumuler des doublons et des styles \"temporaires\"."
+      ],
+      "tags": [
+        "design-system",
+        "design-to-code",
+        "gouvernance",
+        "veille",
+        "tokens"
+      ],
+      "notes": "",
+      "createdAt": 1774748975197
+    },
+    {
       "id": "1774727403533",
       "url": "https://design-systems-mcp.southleft.com/",
       "title": "Créer un Design System Agentique et Autonome",
