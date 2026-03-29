@@ -1,6 +1,33 @@
 {
   "resources": [
     {
+      "id": "1774750039088",
+      "url": "https://www.getlyse.com/news/we-stopped-using-figma",
+      "title": "Design-as-Code : La fin du monopole de Figma ?",
+      "summary": "Cette réflexion marque le passage d'un flux de travail centré sur le dessin (Figma) vers un environnement \"code-first\" assisté par l'IA. Elle propose de déplacer la Source de Vérité directement dans la codebase pour permettre aux designers et développeurs de co-créer via des agents intelligents.",
+      "tldr": "Cette réflexion marque le passage d'un flux de travail centré sur le dessin (Figma) vers un environnement \"code-first\" assisté par l'IA. Elle propose de déplacer la Source de Vérité directement dans la codebase pour permettre aux designers et développeurs de co-créer via des agents intelligents.",
+      "insights": [
+        "Figma comme outil de croquis : Le design visuel redevient une phase d'exploration rapide plutôt qu'une spécification technique rigide et souvent obsolète.",
+        "==Source de vérité unique (SSOT) : Pour que l'IA soit efficace, elle doit s'appuyer sur le code réel et non sur une approximation visuelle, éliminant ainsi les erreurs de parité.==",
+        "**Maturité \"Agentic-Ready\" : Un système n'est prêt pour l'IA que si ses composants et tokens sont structurés de manière sémantique et \"lisibles par la machine\".**",
+        "Le Designer-Orchestrateur : Le rôle évolue vers la __définition de contraintes, de règles de gouvernance et d'intentions architecturales__ plutôt que la manipulation manuelle de pixels.",
+        "Prototypage en environnement de build : L'IA permet de tester des idées directement avec de la donnée réelle et des composants de production, rendant les tests utilisateurs plus fiables.",
+        "Réduction radicale de la dette : En supprimant l'étape de traduction manuelle (handoff), on évite l'accumulation d'incohérences entre la vision design et la réalité technique.",
+        "Collaboration par le protocole (MCP) : L'usage de serveurs comme le Figma Console MCP permet à l'IA d'agir comme un pont bidirectionnel entre le dessin et le produit final."
+      ],
+      "tags": [
+        "design-to-code",
+        "design-system",
+        "ia-generation",
+        "experience-machine",
+        "cursor",
+        "veille",
+        "tokens"
+      ],
+      "notes": "",
+      "createdAt": 1774750039091
+    },
+    {
       "id": "1774748975195",
       "url": "https://designsystems.surf/articles/typography-system-101-a-step-by-step-guide",
       "title": "Bâtir une architecture typographique évolutive et logique",
