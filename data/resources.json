@@ -1,6 +1,34 @@
 {
   "resources": [
     {
+      "id": "1775826246058",
+      "url": "https://www.youtube.com/watch?v=iezEcwMuIk0",
+      "title": "Automatiser son Design System avec Claude chez Finary",
+      "summary": "Cette ressource détaille comment transformer un Design System en une infrastructure capable d'alimenter des agents IA pour automatiser la production d'interfaces. Elle démontre l'utilité de déléguer l'exécution technique à l'IA pour permettre aux designers de se concentrer sur la créativité et l'expérience utilisateur.",
+      "tldr": "Cette ressource détaille comment transformer un Design System en une infrastructure capable d'alimenter des agents IA pour automatiser la production d'interfaces. Elle démontre l'utilité de déléguer l'exécution technique à l'IA pour permettre aux designers de se concentrer sur la créativité et l'expérience utilisateur.",
+      "insights": [
+        "Des fondations saines et des tokens structurés sont les prérequis indispensables pour que des agents IA puissent collaborer sur le produit.",
+        "L'utilisation d'IA comme Claude permet d'automatiser l'exécution répétitive, libérant ainsi du temps pour la réflexion stratégique et créative.",
+        "==Le flux de travail repose sur une spécification (spec) ultra-précise qui sert de source de vérité unique pour l'agent. ==",
+        "**Grâce à l'IA, des profils non-designers (comme les Product Managers) peuvent désormais générer des écrans complexes et conformes au système de design**.",
+        "L'outil \"Bridge\" permet d'orchestrer ces workflows directement depuis des interfaces quotidiennes comme Slack ou le terminal.",
+        "__L'IA améliore sa précision en continu__ grâce à un système d'apprentissage basé sur les corrections apportées par l'humain.",
+        "==Le rôle du Design System Engineer évolue vers une dimension \"Ops\" ==où la majeure partie du travail s'effectue dans le code et le terminal."
+      ],
+      "tags": [
+        "design-system",
+        "ia-generation",
+        "figma",
+        "tokens",
+        "design-to-code",
+        "experience-machine",
+        "cursor",
+        "storybook"
+      ],
+      "notes": "",
+      "createdAt": 1775826246064
+    },
+    {
       "id": "1774750039088",
       "url": "https://www.getlyse.com/news/we-stopped-using-figma",
       "title": "Abandon de Figma pour un workflow IA-natif",
