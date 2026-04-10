@@ -1,6 +1,31 @@
 {
   "resources": [
     {
+      "id": "1775827008730",
+      "url": "https://x.com/rubenhassid/status/2042105069550932138",
+      "title": "Guide Claude Computer : l'IA pilote votre ordinateur",
+      "summary": "Ce guide explique comment configurer Claude pour qu'il interagisse physiquement avec votre ordinateur (clics, navigation, saisie). C'est utile pour automatiser des processus complexes au-delà du navigateur, transformant l'IA en un agent opérationnel sur votre machine.",
+      "tldr": "Ce guide explique comment configurer Claude pour qu'il interagisse physiquement avec votre ordinateur (clics, navigation, saisie). C'est utile pour automatiser des processus complexes au-delà du navigateur, transformant l'IA en un agent opérationnel sur votre machine.",
+      "insights": [
+        "Activation de la fonction \"Computer use\" indispensable via les paramètres de l'application desktop.",
+        "Utilisation de \"Claude Dispatch\" pour synchroniser et piloter son ordinateur à distance depuis son mobile.",
+        "Nécessité d'un plan payant (Pro ou Max) et de l'installation de l'application de bureau officielle.",
+        "Configuration rigoureuse des permissions macOS, notamment l'Accessibilité et l'Enregistrement de l'écran.",
+        "Sécurisation critique consistant à interdire l'accès de l'IA aux applications sensibles comme les gestionnaires de mots de passe.",
+        "Recommandation d'utiliser le modèle Opus 4.6 pour assurer un raisonnement fiable lors des tâches multi-étapes.",
+        "Capacité de l'IA à \"voir\" l'écran en temps réel pour exécuter des commandes basées sur le contexte visuel."
+      ],
+      "tags": [
+        "ia-generation",
+        "experience-machine",
+        "veille",
+        "gouvernance",
+        "audit-conformite"
+      ],
+      "notes": "",
+      "createdAt": 1775827008730
+    },
+    {
       "id": "1775826246058",
       "url": "https://www.youtube.com/watch?v=iezEcwMuIk0",
       "title": "Automatiser son Design System avec Claude chez Finary",
