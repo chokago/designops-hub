@@ -1,6 +1,31 @@
 {
   "resources": [
     {
+      "id": "1775827813987",
+      "url": "https://x.com/jspujji/status/2034616093386678778",
+      "title": "Claude Cowork : l'employé IA pour automatiser le marketing",
+      "summary": "Claude Cowork permet de passer d'un simple mode \"Chat\" à un agent autonome capable de gérer vos fichiers et d'exécuter des tâches complexes sans supervision directe. C'est un outil indispensable pour déléguer l'administration et la recherche technique, libérant ainsi du temps pour la stratégie pure.",
+      "tldr": "Claude Cowork permet de passer d'un simple mode \"Chat\" à un agent autonome capable de gérer vos fichiers et d'exécuter des tâches complexes sans supervision directe. C'est un outil indispensable pour déléguer l'administration et la recherche technique, libérant ainsi du temps pour la stratégie pure.",
+      "insights": [
+        "Cowork est un outil agentique intégré à l'application desktop qui possède un accès direct en lecture et écriture à vos dossiers locaux.",
+        "Contrairement au chat, l'utilisateur définit l'objectif final (\"done\") et l'IA décompose seule le plan d'action.",
+        "La sécurité des données est assurée par la création d'un dossier \"Workspace\" dédié, limitant le périmètre d'action de l'IA.",
+        "L'utilisation de fichiers de contexte en format .md permet d'entraîner l'IA à votre ton, votre identité et vos priorités.",
+        "Les \"Global Instructions\" servent de **garde-fous** permanents pour définir les préférences de sortie et les règles de validation.",
+        "==Des plug-ins spécialisés ==permettent d'automatiser des flux métiers comme le drafting de campagnes marketing ou ==l'audit de design.  ==",
+        "* L'outil excelle dans l'organisation de fichiers en vrac, le sourcing d'influenceurs et la ==veille concurrentielle programmée==.",
+        "* La fonction de planification permet d'automatiser des rapports récurrents (ex : chaque lundi matin) sans intervention humaine."
+      ],
+      "tags": [
+        "ia-generation",
+        "experience-machine",
+        "veille",
+        "audit-conformite"
+      ],
+      "notes": "",
+      "createdAt": 1775827813990
+    },
+    {
       "id": "1775827008730",
       "url": "https://x.com/rubenhassid/status/2042105069550932138",
       "title": "Guide Claude Computer : l'IA pilote votre ordinateur",
