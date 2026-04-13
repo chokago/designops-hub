@@ -1,6 +1,27 @@
 {
   "resources": [
     {
+      "id": "1776111140197",
+      "url": "https://www.figma.com/community/plugin/1610445027282984682/ui-match-figma-to-live-site-qa-visual-audit-ui-comparison-tool",
+      "title": "UI Match : Audit Visuel Figma vers Live Site",
+      "summary": "Ce plugin permet de comparer directement vos cadres Figma avec le rendu d'un site web en production. Il est indispensable pour identifier les incohérences visuelles et valider la fidélité de l'intégration lors des phases de recette.",
+      "tldr": "Ce plugin permet de comparer directement vos cadres Figma avec le rendu d'un site web en production. Il est indispensable pour identifier les incohérences visuelles et valider la fidélité de l'intégration lors des phases de recette.",
+      "insights": [
+        "Permet une comparaison par superposition (overlay) pour un alignement pixel-perfect.",
+        "Identifie rapidement les écarts de marges, de couleurs et de typographie entre le design et le code.",
+        "Optimise le processus de Design QA en fournissant un support visuel aux développeurs.",
+        "Facilite la détection des dérives visuelles sur différents navigateurs et résolutions.",
+        "Réduit les allers-retours fastidieux entre Figma et l'inspecteur d'éléments du navigateur."
+      ],
+      "tags": [
+        "figma",
+        "veille",
+        "design-to-code"
+      ],
+      "notes": "",
+      "createdAt": 1776111140199
+    },
+    {
       "id": "1775827813987",
       "url": "https://x.com/jspujji/status/2034616093386678778",
       "title": "Claude Cowork : l'employé IA pour automatiser le marketing",
